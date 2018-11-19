@@ -14,7 +14,7 @@ public class FlyToggleCommand extends CompositeCommand {
 
     @Override
     public void setup() {
-        this.setPermission("islandfly.fly");
+        this.setPermission("fly");
         this.setOnlyPlayer(true);
         this.setDescription("islandfly.command.description");
     }
