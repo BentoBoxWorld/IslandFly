@@ -1,5 +1,7 @@
-package bentobox.addon.islandfly;
+package bentobox.addon.islandfly.listeners;
 
+import bentobox.addon.islandfly.FlySettings;
+import bentobox.addon.islandfly.IslandFlyAddon;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,43 +23,44 @@ public class FlyListener implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onExitIsland(IslandEvent.IslandExitEvent event){
-        final UUID playerUUID = event.getPlayerUUID();
+    public void onExitIsland(final IslandEvent.IslandExitEvent event){
         // Check only when player exit is own island
+        final UUID playerUUID = event.getPlayerUUID();
         if(!event.getIsland().getMembers().containsKey(playerUUID)) return;
 
+        // Player already flying
         final User user = User.getInstance(playerUUID);
-        // Player is allowed to fly
         if(!user.getPlayer().getAllowFlight()) return;
-        // Check bypass permission
+        // Bypass permission
         if(user.hasPermission("islandfly.bypass")) return;
 
-        final int flyTimeout = settings.getFlyTimeout();
         // Alert player fly will be disabled
+        final int flyTimeout = settings.getFlyTimeout();
         user.sendMessage("islandfly.fly-outside-alert", "[timeout]", String.valueOf(flyTimeout));
         // If timeout is 0 or less disable fly immediately
         if(flyTimeout <= 0){
             disableFly(user);
             return;
         }
-
-        // Disable fly with a delay
+        // Else disable fly with a delay
         this.plugin.getServer().getScheduler().runTaskLater(plugin, ()->{
-            // Check player not disconnected
+            // Verify player is still online
             if(!user.isOnline()) return;
             final IslandsManager islands = plugin.getIslands();
             // Check player is not on his own island
             if(!(islands.userIsOnIsland(user.getWorld(), user)
             && islands.getIslandAt(user.getLocation()).get().getMembers().containsKey(playerUUID))){
-                // Disable player fly and alert it
                 disableFly(user);
             }
         }, 20L* settings.getFlyTimeout());
     }
 
+    /**
+     * Disable player fly and alert it
+     * @param user user to disable fly mode
+     */
     private void disableFly(final User user){
         final Player player = user.getPlayer();
-        // Disable player fly and alert it
         player.setFlying(false);
         player.setAllowFlight(false);
         user.sendMessage("islandfly.disable-fly");

@@ -39,10 +39,12 @@ public class IslandFlyAddon extends Addon {
     }
 
     @Override
-    public void onDisable() {
+    public void onDisable() {}
 
-    }
-
+    /**
+     * Get addon settings
+     * @return addon fly settings
+     */
     public FlySettings getSettings() {
         return settings;
     }
