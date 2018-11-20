@@ -36,7 +36,7 @@ public class FlyListener implements Listener {
 
         // Alert player fly will be disabled
         final int flyTimeout = settings.getFlyTimeout();
-        user.sendMessage("islandfly.fly-outside-alert", "[timeout]", String.valueOf(flyTimeout));
+        user.sendMessage("islandfly.fly-outside-alert", TextVariables.NUMBER, String.valueOf(flyTimeout));
         // If timeout is 0 or less disable fly immediately
         if(flyTimeout <= 0){
             disableFly(user);
