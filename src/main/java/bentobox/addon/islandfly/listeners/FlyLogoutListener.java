@@ -12,8 +12,8 @@ public class FlyLogoutListener implements Listener {
 
         final Player player = event.getPlayer();
 
-        if(!event.getPlayer().getAllowFlight()) return;
-        if(event.getPlayer().hasPermission("islandfly.bypass")) return;
+        if(!player.getAllowFlight()) return;
+        if(player.hasPermission("islandfly.bypass")) return;
 
         // Disable fly
         player.setFlying(false);
