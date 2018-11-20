@@ -3,4 +3,4 @@ islandfly:
   disable-fly: "Your fly mode has been disabled."
   enable-fly: "Your fly mode has been enabled."
   command:
-    description: "Allow you to fly on your island."
+    description: "allows you to fly on your island"
