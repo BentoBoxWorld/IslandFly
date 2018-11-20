@@ -23,7 +23,7 @@ public class IslandFlyAddon extends Addon {
         if(settings.isFlyDisabledOnLogout())
             pluginManager.registerEvents(new FlyLogoutListener(), this.getPlugin());
         // BSkyBlock hook in
-        this.getPlugin().getAddonsManager().getAddonByName("BSkyBlock").ifPresent(acidIsland -> {
+        this.getPlugin().getAddonsManager().getAddonByName("BSkyBlock").ifPresent(bskyblock -> {
             final CompositeCommand bsbIslandCmd = BentoBox.getInstance().getCommandsManager().getCommand("island");
             if (bsbIslandCmd != null) {
                 new FlyToggleCommand(bsbIslandCmd);
