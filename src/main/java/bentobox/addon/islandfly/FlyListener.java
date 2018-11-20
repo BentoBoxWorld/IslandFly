@@ -27,13 +27,20 @@ public class FlyListener implements Listener {
         if(!event.getIsland().getMembers().containsKey(playerUUID)) return;
 
         final User user = User.getInstance(playerUUID);
-        final Player player = user.getPlayer();
         // Player is allowed to fly
-        if(!player.getAllowFlight()) return;
+        if(!user.getPlayer().getAllowFlight()) return;
         // Check bypass permission
         if(user.hasPermission("islandfly.bypass")) return;
+
+        final int flyTimeout = settings.getFlyTimeout();
         // Alert player fly will be disabled
-        user.sendMessage("islandfly.fly-outside-alert");
+        user.sendMessage("islandfly.fly-outside-alert", "[timeout]", String.valueOf(flyTimeout));
+        // If timeout is 0 or less disable fly immediately
+        if(flyTimeout <= 0){
+            disableFly(user);
+            return;
+        }
+
         // Disable fly with a delay
         this.plugin.getServer().getScheduler().runTaskLater(plugin, ()->{
             // Check player not disconnected
@@ -43,11 +50,17 @@ public class FlyListener implements Listener {
             if(!(islands.userIsOnIsland(user.getWorld(), user)
             && islands.getIslandAt(user.getLocation()).get().getMembers().containsKey(playerUUID))){
                 // Disable player fly and alert it
-                player.setFlying(false);
-                player.setAllowFlight(false);
-                user.sendMessage("islandfly.disable-fly");
+                disableFly(user);
             }
         }, 20L* settings.getFlyTimeout());
+    }
+
+    private void disableFly(final User user){
+        final Player player = user.getPlayer();
+        // Disable player fly and alert it
+        player.setFlying(false);
+        player.setAllowFlight(false);
+        user.sendMessage("islandfly.disable-fly");
     }
 
 }
