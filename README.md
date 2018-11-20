@@ -14,10 +14,10 @@ Add-on for BentoBox to allow players of BSkyBlock or AcidIsland to fly on their 
 
 There are only two options in the config:
 
-fly-timeout
+**fly-timeout**
 How many seconds the addon will wait before disabling fly mode when a player exit his island.
 
-logout-disable-fly
+**logout-disable-fly**
 If the fly mode should be disabled when a player disconnect.
 
 ## Commands
