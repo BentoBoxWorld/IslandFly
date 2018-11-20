@@ -1,7 +1,7 @@
-package bentobox.addon.islandfly;
+package world.bentobox.islandfly;
 
-import bentobox.addon.islandfly.listeners.FlyListener;
-import bentobox.addon.islandfly.listeners.FlyLogoutListener;
+import world.bentobox.islandfly.listeners.FlyListener;
+import world.bentobox.islandfly.listeners.FlyLogoutListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import world.bentobox.bentobox.BentoBox;

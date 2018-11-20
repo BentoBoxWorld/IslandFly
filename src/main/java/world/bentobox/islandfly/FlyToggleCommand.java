@@ -1,4 +1,4 @@
-package bentobox.addon.islandfly;
+package world.bentobox.islandfly;
 
 import org.bukkit.entity.Player;
 import world.bentobox.bentobox.api.commands.CompositeCommand;

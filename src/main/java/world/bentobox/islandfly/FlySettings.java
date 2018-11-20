@@ -1,4 +1,4 @@
-package bentobox.addon.islandfly;
+package world.bentobox.islandfly;
 
 public class FlySettings {
 

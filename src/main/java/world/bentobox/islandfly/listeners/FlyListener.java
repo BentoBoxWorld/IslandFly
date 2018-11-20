@@ -1,7 +1,7 @@
-package bentobox.addon.islandfly.listeners;
+package world.bentobox.islandfly.listeners;
 
-import bentobox.addon.islandfly.FlySettings;
-import bentobox.addon.islandfly.IslandFlyAddon;
+import world.bentobox.islandfly.FlySettings;
+import world.bentobox.islandfly.IslandFlyAddon;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -1,4 +1,4 @@
-package bentobox.addon.islandfly.listeners;
+package world.bentobox.islandfly.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
