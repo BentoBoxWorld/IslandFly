@@ -3,4 +3,4 @@ islandfly:
   disable-fly: "Votre mode volant vient d'être désactivé."
   enable-fly: "Votre mode volant vient d'être activé."
   command:
-    description: "Vous permet de voler sur votre île."
+    description: "vous permet de voler sur votre île"
