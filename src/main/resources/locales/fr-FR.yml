@@ -1,6 +1,6 @@
 islandfly:
   fly-outside-alert: "Vous êtes hors de votre île, vous ne pourrez plus voler dans %amount% secondes."
   disable-fly: "Votre mode volant vient d'être désactivé."
-  enable-fly: "Votre mode voalnt vient d'être activé."
+  enable-fly: "Votre mode volant vient d'être activé."
   command:
     description: "Vous permet de voler sur votre île."
