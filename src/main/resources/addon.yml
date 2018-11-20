@@ -2,5 +2,5 @@ name: IslandFly
 version: ${project.version}
 main: bentobox.addon.islandfly.IslandFlyAddon
 authors: [Poslovitch, DarkRails]
-description: Allow player to fly on their island
+description: Allow players to fly on their island
 softdepend: AcidIsland, BSkyBlock
