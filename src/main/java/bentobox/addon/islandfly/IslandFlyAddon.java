@@ -43,7 +43,7 @@ public class IslandFlyAddon extends Addon {
 
     /**
      * Get addon settings
-     * @return addon fly settings
+     * @return settings
      */
     public FlySettings getSettings() {
         return settings;

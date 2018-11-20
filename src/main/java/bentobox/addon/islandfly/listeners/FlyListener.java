@@ -57,7 +57,7 @@ public class FlyListener implements Listener {
 
     /**
      * Disable player fly and alert it
-     * @param user user to disable fly mode
+     * @param user
      */
     private void disableFly(final User user){
         final Player player = user.getPlayer();
