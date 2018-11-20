@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.zeltiamc</groupId>
-    <artifactId>generator</artifactId>
+    <artifactId>islandfly</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>IslandFly</name>
 
-    <description>IslandFly is an add-on for BentoBox, an expandable Minecraft Bukkit plugin for island-type games like ASkyBlock or AcidIsland.</description>
+    <description>Add-on for BentoBox to allow players of BSkyBlock or AcidIsland to fly on their island. This add-on will work for both game modes.</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
