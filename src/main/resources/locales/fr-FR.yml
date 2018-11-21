@@ -4,3 +4,4 @@ islandfly:
   enable-fly: "Vous pouvez désormais voler."
   command:
     description: "vous permet de voler sur votre île"
+    only-on-island: "Vous pouvez uniquement voler sur votre île."
