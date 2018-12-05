@@ -1,0 +1,7 @@
+islandfly:
+  fly-outside-alert: "You are outside your island so fly mode will be disabled in [number] seconds."
+  disable-fly: "Your fly mode has been disabled."
+  enable-fly: "Your fly mode has been enabled."
+  command:
+    description: "allows you to fly on your island"
+    only-on-island: "You can only fly on your island."
