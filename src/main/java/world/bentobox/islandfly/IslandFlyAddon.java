@@ -1,5 +1,6 @@
 package world.bentobox.islandfly;
 
+import world.bentobox.islandfly.listeners.FlyDeathListener;
 import world.bentobox.islandfly.listeners.FlyListener;
 import world.bentobox.islandfly.listeners.FlyLogoutListener;
 import org.bukkit.Bukkit;
@@ -19,6 +20,7 @@ public class IslandFlyAddon extends Addon {
         // Register Listeners
         final PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new FlyListener(this), this.getPlugin());
+        pluginManager.registerEvents(new FlyDeathListener(this), this.getPlugin());
         // Register listener to disable fly on logout if activated
         if(settings.isFlyDisabledOnLogout())
             pluginManager.registerEvents(new FlyLogoutListener(), this.getPlugin());

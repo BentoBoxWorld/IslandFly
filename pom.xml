@@ -7,7 +7,6 @@
     <groupId>world.bentobox</groupId>
     <artifactId>IslandFly</artifactId>
     <version>${revision}</version>
-
     <packaging>jar</packaging>
 
     <name>IslandFly</name>
@@ -53,7 +52,7 @@
         <!-- Revision variable removes warning about dynamic version -->
         <revision>${build.version}-SNAPSHOT</revision>
         <!-- This allows to change between versions and snapshots. -->
-        <build.version>0.1.0</build.version>
+        <build.version>0.2.0</build.version>
         <build.number>-LOCAL</build.number>
     </properties>
 

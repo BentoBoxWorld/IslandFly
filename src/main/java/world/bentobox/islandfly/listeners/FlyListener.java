@@ -53,6 +53,9 @@ public class FlyListener implements Listener {
             && islands.getIslandAt(user.getLocation()).get().getMembers().containsKey(playerUUID))){
                 disableFly(user);
             }
+            else {
+            	user.sendMessage("islandfly.cancel-disable");
+            }
         }, 20L* settings.getFlyTimeout());
     }
 
