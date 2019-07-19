@@ -1,13 +1,13 @@
 # IslandFly
 
-Add-on for BentoBox to allow players of BSkyBlock or AcidIsland to fly on their island. This add-on will work for both game modes.
+Add-on for BentoBox to allow players of Gamemode Addons to fly on their island.
 
 ## How to use
 
-1. Place the jar in the addons folder of the BentoBox plugin
+1. Place the .jar in the addons folder of the BentoBox plugin
 2. Restart the server
 3. The addon will create a data folder and inside the folder will be a config.yml
-4. Edit the config.yml how you want
+4. Edit the config.yml if required
 5. Restart the server if you make a change
 
 ## Config.yml
@@ -21,6 +21,20 @@ How many seconds the addon will wait before disabling fly mode when a player exi
 If the fly mode should be disabled when a player disconnect.
 
 ## Commands
+**/is fly** - This command toggles flight **On** and **Off** 
 
-/is fly (bskyblock.fly)
-Toggle fly mode of the sender.
+## Permissions
+**[gamemode].island.fly** - **/is fly** 
+
+Example: 
+    **bskyblock.island.fly**
+
+**[gamemode].island.flybypass** - **Enables user to use fly command on other islands too**
+
+
+Example:
+**caveblock.island.flybypass**
+  
+
+
+
