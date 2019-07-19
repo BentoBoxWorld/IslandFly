@@ -2,6 +2,8 @@ package world.bentobox.islandfly.listeners;
 
 import world.bentobox.islandfly.FlySettings;
 import world.bentobox.islandfly.IslandFlyAddon;
+
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,9 +33,10 @@ public class FlyListener implements Listener {
 
         // Player already flying
         final User user = User.getInstance(playerUUID);
+        
         if(!user.getPlayer().getAllowFlight()) return;
         // Bypass permission
-        if(user.hasPermission("islandfly.bypass")) return;
+        if(user.hasPermission(plugin.getIWM().getPermissionPrefix(user.getWorld()) + "island.flybypass")) return;
 
         // Alert player fly will be disabled
         final int flyTimeout = settings.getFlyTimeout();
