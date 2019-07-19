@@ -28,7 +28,7 @@ public class FlyDeathListener implements Listener {
 		final Player player = event.getEntity();
 		final UUID playerUUID = player.getUniqueId();
 		final User user = User.getInstance(playerUUID);
-		if(user.hasPermission(plugin.getIWM().getPermissionPrefix(user.getWorld()) + "island.flybypass")) return;
+		if(user.hasPermission(plugin.getIWM().getAddon(user.getWorld()).get().getPermissionPrefix() + "island.flybypass")) return;
 		disableFly(user);
 	}
 	
