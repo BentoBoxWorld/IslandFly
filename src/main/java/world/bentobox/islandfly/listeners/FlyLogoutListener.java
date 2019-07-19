@@ -7,13 +7,13 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class FlyLogoutListener implements Listener {
 
+	
     @EventHandler
     public void onLogout(final PlayerQuitEvent event){
 
         final Player player = event.getPlayer();
 
         if(!player.getAllowFlight()) return;
-        if(player.hasPermission("islandfly.bypass")) return;
 
         // Disable fly
         player.setFlying(false);
