@@ -24,12 +24,12 @@ If the fly mode should be disabled when a player disconnect.
 **/is fly** - This command toggles flight **On** and **Off** 
 
 ## Permissions
-**[gamemode].island.fly** - **/is fly** 
+**[gamemode].island.fly** - For usage of flight command
 
 Example: 
     **bskyblock.island.fly**
 
-**[gamemode].island.flybypass** - **Enables user to use fly command on other islands too**
+**[gamemode].island.flybypass** - Enables user to use fly command on other islands too
 
 
 Example:
