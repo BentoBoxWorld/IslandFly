@@ -21,7 +21,7 @@ public class IslandFlyAddon extends Addon {
           
         //Hook into gamemodes
         this.getPlugin().getAddonsManager().getGameModeAddons().forEach(gm -> {
-            if(gm.getPlayerCommand().isPresent()) {
+            if (gm.getPlayerCommand().isPresent()) {
         	    new FlyToggleCommand(gm.getPlayerCommand().get());
         	    hooked=true;
         	}
