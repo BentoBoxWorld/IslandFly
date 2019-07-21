@@ -21,17 +21,16 @@ public class IslandFlyAddon extends Addon {
           
         //Hook into gamemodes
         this.getPlugin().getAddonsManager().getGameModeAddons().forEach(gm -> {
-        	if(gm.getPlayerCommand().isPresent()) 
-        	{
-        		new FlyToggleCommand(gm.getPlayerCommand().get());
-        		hooked=true;
+            if(gm.getPlayerCommand().isPresent()) {
+        	    new FlyToggleCommand(gm.getPlayerCommand().get());
+        	    hooked=true;
         	}
         	
         });
         
         if(hooked) 
         {	
-        	// Register Listeners
+            // Register Listeners
             final PluginManager pluginManager = Bukkit.getPluginManager();
             pluginManager.registerEvents(new FlyListener(this), this.getPlugin());
             pluginManager.registerEvents(new FlyDeathListener(this), this.getPlugin());
@@ -46,7 +45,7 @@ public class IslandFlyAddon extends Addon {
     
     @Override
     public void onDisable() {
-    	//Nothing to do here
+        //Nothing to do here
     }
 
     
