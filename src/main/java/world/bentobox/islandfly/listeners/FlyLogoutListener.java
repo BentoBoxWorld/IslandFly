@@ -12,8 +12,9 @@ public class FlyLogoutListener implements Listener {
     public void onLogout(final PlayerQuitEvent event) {
 
         final Player player = event.getPlayer();
-
-        if(!player.getAllowFlight()) return;
+	
+	//Stop further execution if fly wasn't toggled
+        if (!player.getAllowFlight()) return;
 
         // Disable fly
         player.setFlying(false);
