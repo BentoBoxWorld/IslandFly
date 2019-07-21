@@ -31,22 +31,22 @@ public class FlyListener implements Listener {
         // Check only when player exit is own island
         final UUID playerUUID = event.getPlayerUUID();
         
-        if(!event.getIsland().getMembers().containsKey(playerUUID)) return;
+        if (!event.getIsland().getMembers().containsKey(playerUUID)) return;
 
         // Player already flying
         final User user = User.getInstance(playerUUID);
         
-        if(!user.getPlayer().getAllowFlight()) return;
-        
+        if (!user.getPlayer().getAllowFlight()) return;
         // Bypass permission
-        if(user.hasPermission(plugin.getIWM().getAddon(user.getWorld()).get().getPermissionPrefix() + "island.flybypass")) return;
+        if (user.hasPermission(plugin.getIWM().getAddon(user.getWorld()).get().getPermissionPrefix() + "island.flybypass")) return;
 
         // Alert player fly will be disabled
         final int flyTimeout = settings.getFlyTimeout();
+        
         user.sendMessage("islandfly.fly-outside-alert", TextVariables.NUMBER, String.valueOf(flyTimeout));
         
         // If timeout is 0 or less disable fly immediately
-        if(flyTimeout <= 0) {
+        if (flyTimeout <= 0) {
             disableFly(user);
             return;
         }
@@ -60,7 +60,7 @@ public class FlyListener implements Listener {
             final IslandsManager islands = plugin.getIslands();
             
             // Check player is not on his own island
-            if(!(islands.userIsOnIsland(user.getWorld(), user)
+            if (!(islands.userIsOnIsland(user.getWorld(), user)
             && islands.getIslandAt(user.getLocation()).get().getMembers().containsKey(playerUUID))) {
                 disableFly(user);
             }
