@@ -38,14 +38,15 @@ public class FlyToggleCommand extends CompositeCommand {
         islands.userIsOnIsland(user.getWorld(), user);
         final Optional<Island> island = islands.getIslandAt(user.getLocation());
         
-        if(!user.hasPermission(this.getPermissionPrefix() + "island.flybypass") && (!island.isPresent() || !island.get().getMembers().containsKey(user.getUniqueId()))){
+        if (!user.hasPermission(this.getPermissionPrefix() + "island.flybypass") && (!island.isPresent() || !island.get().getMembers().containsKey(user.getUniqueId()))) {
             
         	user.sendMessage("islandfly.command.only-on-island");
             return true;
         }
         
         final Player player = user.getPlayer();
-        if(user.getPlayer().getAllowFlight()){
+	
+        if (user.getPlayer().getAllowFlight()) {
         	
             // Disable fly and notify player
             player.setFlying(false);
