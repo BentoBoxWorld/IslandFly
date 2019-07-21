@@ -9,7 +9,7 @@ public class FlyLogoutListener implements Listener {
 
 	
     @EventHandler
-    public void onLogout(final PlayerQuitEvent event){
+    public void onLogout(final PlayerQuitEvent event) {
 
         final Player player = event.getPlayer();
 
