@@ -28,9 +28,9 @@ public class FlyToggleCommand extends CompositeCommand {
     public boolean execute(User user, String label, List<String> args) {
         
     	// Checks world from corresponding gamemode command with the world player is executing in
-    	if(this.getWorld() != Util.getWorld(user.getWorld())){
-    	user.sendMessage("islandfly.wrong-world");
-    	return true;
+    	if (this.getWorld() != Util.getWorld(user.getWorld())) {
+    	    user.sendMessage("islandfly.wrong-world");
+    	    return true;
     	}
     	
     	// Allow this command only on island
@@ -39,8 +39,7 @@ public class FlyToggleCommand extends CompositeCommand {
         final Optional<Island> island = islands.getIslandAt(user.getLocation());
         
         if (!user.hasPermission(this.getPermissionPrefix() + "island.flybypass") && (!island.isPresent() || !island.get().getMembers().containsKey(user.getUniqueId()))) {
-            
-        	user.sendMessage("islandfly.command.only-on-island");
+            user.sendMessage("islandfly.command.only-on-island");
             return true;
         }
         
