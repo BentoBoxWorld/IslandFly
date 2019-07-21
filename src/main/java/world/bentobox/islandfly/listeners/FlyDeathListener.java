@@ -30,7 +30,7 @@ public class FlyDeathListener implements Listener {
 	    final UUID playerUUID = player.getUniqueId();
 	    final User user = User.getInstance(playerUUID);
 		
-	    if(user.hasPermission(plugin.getIWM().getAddon(user.getWorld()).get().getPermissionPrefix() + "island.flybypass")) return;
+	    if (user.hasPermission(plugin.getIWM().getAddon(user.getWorld()).get().getPermissionPrefix() + "island.flybypass")) return;
 	    disableFly(user);
 	}
 	
@@ -43,11 +43,11 @@ public class FlyDeathListener implements Listener {
 	    final UUID playerUUID = player.getUniqueId();
 	    Optional<Island> island = plugin.getIslands().getIslandAt(player.getLocation());
 		
-	    if(island.isPresent())
-	    if(island.get().getMembers().containsKey(playerUUID)) {
+	    if (island.isPresent())
+	    if (island.get().getMembers().containsKey(playerUUID)) {
 		    
 	        //Enable only if it was previously enabled too
-	        if(player.getAllowFlight())
+	        if (player.getAllowFlight())
 	        player.setFlying(true);
 	    }
 	}
