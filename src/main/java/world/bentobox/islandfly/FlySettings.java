@@ -5,7 +5,8 @@ public class FlySettings {
     private int flyTimeout;
     private boolean flyDisabledOnLogout;
 
-    public FlySettings(final IslandFlyAddon addon){
+    public FlySettings(final IslandFlyAddon addon) {
+        
         // Load configuration file
         addon.saveDefaultConfig();
         // Load datas from config
