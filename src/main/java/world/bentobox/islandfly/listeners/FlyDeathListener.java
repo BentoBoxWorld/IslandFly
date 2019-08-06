@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -22,7 +23,7 @@ public class FlyDeathListener implements Listener {
         this.plugin = addon.getPlugin();
     }
 
-	@EventHandler
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onDeath(final PlayerDeathEvent event) {
 		
 	    //Disable fly on death anyway
@@ -33,7 +34,7 @@ public class FlyDeathListener implements Listener {
 	    disableFly(user);
 	}
 	
-	@EventHandler
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onRespawn(PlayerRespawnEvent event) {
 		
 	    //If a player respawns on an island that he's added to, do nothing. 

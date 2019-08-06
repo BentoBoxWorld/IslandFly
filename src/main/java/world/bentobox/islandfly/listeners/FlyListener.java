@@ -1,18 +1,19 @@
 package world.bentobox.islandfly.listeners;
 
-import world.bentobox.islandfly.FlySettings;
-import world.bentobox.islandfly.IslandFlyAddon;
+import java.util.UUID;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+
 import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.api.events.island.IslandEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.managers.IslandsManager;
-
-import java.util.UUID;
+import world.bentobox.islandfly.FlySettings;
+import world.bentobox.islandfly.IslandFlyAddon;
 
 public class FlyListener implements Listener {
 
@@ -25,7 +26,7 @@ public class FlyListener implements Listener {
         this.plugin = addon.getPlugin();
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onExitIsland(final IslandEvent.IslandExitEvent event) {
         
         // Check only when player exit is own island
