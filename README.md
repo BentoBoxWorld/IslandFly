@@ -1,4 +1,5 @@
 # IslandFly
+[![Build Status](https://ci.codemc.org/buildStatus/icon?job=BentoBoxWorld/IslandFly)](https://ci.codemc.org/job/BentoBoxWorld/job/IslandFly/)
 
 Add-on for BentoBox to allow players of Gamemode Addons to fly on their island.
 
