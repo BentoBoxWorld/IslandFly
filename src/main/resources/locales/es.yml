@@ -8,3 +8,4 @@ islandfly:
   wrong-world: "&cNo estás en el mundo del modo de juego correcto"
   command:
     only-on-island: "&cSolo puedes volar en tu isla."
+    description: te permite volar en tu isla
