@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>IslandFly</name>
-    <description>Add-on for BentoBox to allow players of BSkyBlock or AcidIsland to fly on their island. This add-on will work for both game modes.</description>
+    <description>Add-on for BentoBox to allow players of to fly on their island. This add-on will work in all game modes.</description>
     <url>https://github.com/BentoBoxWorld/IslandFly</url>
     <inceptionYear>2018</inceptionYear>
 
@@ -47,12 +47,12 @@
         <java.version>1.8</java.version>
         <powermock.version>1.7.4</powermock.version>
         <!-- More visible way how to change dependency versions -->
-        <spigot.version>1.14.3-R0.1-SNAPSHOT</spigot.version>
-        <bentobox.version>1.6.0-SNAPSHOT</bentobox.version>
+        <spigot.version>1.14.4-R0.1-SNAPSHOT</spigot.version>
+        <bentobox.version>1.7.0</bentobox.version>
         <!-- Revision variable removes warning about dynamic version -->
         <revision>${build.version}-SNAPSHOT</revision>
         <!-- This allows to change between versions and snapshots. -->
-        <build.version>0.2.0</build.version>
+        <build.version>1.7.0</build.version>
         <build.number>-LOCAL</build.number>
     </properties>
 

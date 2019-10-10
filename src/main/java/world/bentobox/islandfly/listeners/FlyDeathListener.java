@@ -15,25 +15,51 @@ import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.islandfly.IslandFlyAddon;
 
+
+/**
+ * This class manages Death and Respawn options.
+ */
 public class FlyDeathListener implements Listener {
-	
+
+	/**
+	 * BentoBox plugin instance.
+	 */
     private final BentoBox plugin;
-    
-    public FlyDeathListener(final IslandFlyAddon addon){
+
+
+	/**
+	 * Default constructor.
+	 * @param addon IslandFlyAddon instance
+	 */
+	public FlyDeathListener(final IslandFlyAddon addon){
         this.plugin = addon.getPlugin();
     }
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+
+	/**
+	 * Fired when player died. Removes fly ability in user world, if user does not have flybypass
+	 * permission.
+	 * @param event Instance of PlayerDeathEvent
+	 */
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onDeath(final PlayerDeathEvent event) {
-		
 	    //Disable fly on death anyway
-	    final Player player = event.getEntity();
-	    final UUID playerUUID = player.getUniqueId();
-	    final User user = User.getInstance(playerUUID);
-	    if (plugin.getIWM().getAddon(user.getWorld()).map(a -> user.hasPermission(a.getPermissionPrefix() + "island.flybypass")).orElse(false)) return;
+	    final User user = User.getInstance(event.getEntity().getUniqueId());
+
+	    if (plugin.getIWM().getAddon(user.getWorld()).
+			map(a -> user.hasPermission(a.getPermissionPrefix() + "island.flybypass")).
+			orElse(false)) {
+	    	return;
+		}
+
 	    disableFly(user);
 	}
-	
+
+
+	/**
+	 * Enable fly mode if player had it before.
+	 * @param event Instance of PlayerRespawnEvent
+	 */
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onRespawn(PlayerRespawnEvent event) {
 		
@@ -42,21 +68,21 @@ public class FlyDeathListener implements Listener {
 	    final Player player = event.getPlayer();
 	    final UUID playerUUID = player.getUniqueId();
 	    Optional<Island> island = plugin.getIslands().getIslandAt(player.getLocation());
-		
-	    if (island.isPresent())
-	    if (island.get().getMembers().containsKey(playerUUID)) {
-		    
+
+	    if (island.isPresent() &&
+			island.get().getMembers().containsKey(playerUUID) &&
+			player.getAllowFlight()) {
 	        //Enable only if it was previously enabled too
-	        if (player.getAllowFlight())
-	        player.setFlying(true);
+	       player.setFlying(true);
 	    }
 	}
-	
-	
-	private void disableFly(final User user) {
-		
-		final Player player = user.getPlayer();
-		player.setFlying(false);
-    }
 
+
+	/**
+	 * This method disables fly mode for given User.
+	 * @param user Which must lose its fly ability.
+	 */
+	private void disableFly(final User user) {
+		user.getPlayer().setFlying(false);
+    }
 }

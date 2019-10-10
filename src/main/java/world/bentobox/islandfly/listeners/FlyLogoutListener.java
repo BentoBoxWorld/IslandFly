@@ -6,20 +6,43 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import world.bentobox.islandfly.IslandFlyAddon;
+
+
+/**
+ * This class disables fly mode if player quits server.
+ */
 public class FlyLogoutListener implements Listener {
 
-	
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-    public void onLogout(final PlayerQuitEvent event) {
+    /**
+     * IslandFlyAddon instance.
+     */
+    private IslandFlyAddon addon;
 
-        final Player player = event.getPlayer();
-	
-	//Stop further execution if fly wasn't toggled
-        if (!player.getAllowFlight()) return;
 
-        // Disable fly
-        player.setFlying(false);
-        player.setAllowFlight(false);
+    /**
+     * Default constructor.
+     * @param addon instance of IslandFlyAddon
+     */
+    public FlyLogoutListener(IslandFlyAddon addon)
+    {
+        this.addon = addon;
     }
 
+
+    /**
+     * Disable player fly mode on logout
+     * @param event Instance of PlayerQuitEvent
+     */
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    public void onLogout(final PlayerQuitEvent event) {
+        final Player player = event.getPlayer();
+
+        if (player.getAllowFlight() && this.addon.getSettings().isFlyDisableOnLogout())
+        {
+            // Disable fly
+            player.setFlying(false);
+            player.setAllowFlight(false);
+        }
+    }
 }
