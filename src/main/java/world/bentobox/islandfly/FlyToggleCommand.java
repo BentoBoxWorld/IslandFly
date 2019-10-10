@@ -10,12 +10,19 @@ import world.bentobox.bentobox.util.Util;
 import java.util.List;
 import java.util.Optional;
 
-public class FlyToggleCommand extends CompositeCommand {
 
-	
+/**
+ * This command allows to enable and disable fly mode.
+ */
+public class FlyToggleCommand extends CompositeCommand {
+    /**
+     * Default constructor
+     * @param parent Instance of CompositeCommand
+     */
     public FlyToggleCommand(CompositeCommand parent) {
         super(parent, "fly");
     }
+
 
     @Override
     public void setup() {
@@ -23,6 +30,7 @@ public class FlyToggleCommand extends CompositeCommand {
         this.setOnlyPlayer(true);
         this.setDescription("islandfly.command.description");
     }
+
 
     @Override
     public boolean execute(User user, String label, List<String> args) {
@@ -38,7 +46,8 @@ public class FlyToggleCommand extends CompositeCommand {
         islands.userIsOnIsland(user.getWorld(), user);
         final Optional<Island> island = islands.getIslandAt(user.getLocation());
         
-        if (!user.hasPermission(this.getPermissionPrefix() + "island.flybypass") && (!island.isPresent() || !island.get().getMembers().containsKey(user.getUniqueId()))) {
+        if (!user.hasPermission(this.getPermissionPrefix() + "island.flybypass")
+            && (!island.isPresent() || !island.get().getMembers().containsKey(user.getUniqueId()))) {
             user.sendMessage("islandfly.command.only-on-island");
             return true;
         }

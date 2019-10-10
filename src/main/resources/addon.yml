@@ -8,3 +8,33 @@ softdepend: AcidIsland, BSkyBlock, CaveBlock, SkyGrid
 
 authors: [DarkRails]
 description: Allow players to fly on their island
+
+
+permissions:
+  acidisland.island.fly:
+    description: Allows access to fly command.
+    default: true
+  acidisland.island.flybypass:
+    description: Allows to keep fly mode on player death.
+    default: op
+
+  bskyblock.island.fly:
+    description: Allows access to fly command.
+    default: true
+  bskyblock.island.flybypass:
+    description: Allows to keep fly mode on player death.
+    default: op
+
+  caveblock.island.fly:
+    description: Allows access to fly command.
+    default: true
+  caveblock.island.flybypass:
+    description: Allows to keep fly mode on player death.
+    default: op
+
+  skygrid.island.fly:
+    description: Allows access to fly command.
+    default: true
+  skygrid.island.flybypass:
+    description: Allows to keep fly mode on player death.
+    default: op
