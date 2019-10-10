@@ -1,0 +1,10 @@
+---
+islandfly:
+  fly-outside-alert: "＆cあなたは島の外にいるので、＆e [number]＆c秒でフライモードは無効になります。"
+  disable-fly: "＆cフライモードは無効になっています。"
+  enable-fly: "＆aフライモードが有効になっています。"
+  cancel-disable: "＆aあなたが戻ってきた、ハァッ！フライ燃料が正常に補充されました！"
+  wrong-world: "＆cあなたは正しいゲームモードの世界にいません"
+  command:
+    description: あなたの島で飛ぶことができます
+    only-on-island: "＆cあなたの島でしか飛べません。"
