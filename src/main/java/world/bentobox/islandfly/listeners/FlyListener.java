@@ -57,7 +57,7 @@ public class FlyListener implements Listener {
 
         // Bypass permission
         if (this.addon.getPlugin().getIWM().getAddon(user.getWorld())
-                .map(addon -> user.hasPermission(addon.getPermissionPrefix() + "island.flybypass")).orElse(false)) {
+                .map(a -> user.hasPermission(a.getPermissionPrefix() + "island.flybypass")).orElse(false)) {
             return;
         }
 
