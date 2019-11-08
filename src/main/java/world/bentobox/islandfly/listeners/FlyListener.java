@@ -1,7 +1,5 @@
 package world.bentobox.islandfly.listeners;
 
-import java.util.UUID;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -11,6 +9,7 @@ import world.bentobox.bentobox.api.events.island.IslandEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.managers.IslandsManager;
+import world.bentobox.bentobox.util.Util;
 import world.bentobox.islandfly.IslandFlyAddon;
 
 
@@ -40,17 +39,14 @@ public class FlyListener implements Listener {
      */
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onExitIsland(final IslandEvent.IslandExitEvent event) {
-
         // Check only when player exit is own island
-        final UUID playerUUID = event.getPlayerUUID();
+        // Player already flying
+        final User user = User.getInstance(event.getPlayerUUID());
 
-        if (!event.getIsland().getMembers().containsKey(playerUUID)) {
+        if (!addon.getIslands().userIsOnIsland(Util.getWorld(event.getLocation().getWorld()), user)) {
             return;
         }
-
-        // Player already flying
-        final User user = User.getInstance(playerUUID);
-
+        
         if (!user.getPlayer().getAllowFlight()) {
             return;
         }
@@ -65,13 +61,11 @@ public class FlyListener implements Listener {
         final int flyTimeout = this.addon.getSettings().getFlyTimeout();
 
         user.sendMessage("islandfly.fly-outside-alert", TextVariables.NUMBER, String.valueOf(flyTimeout));
-
         // If timeout is 0 or less disable fly immediately
         if (flyTimeout <= 0) {
             disableFly(user);
             return;
         }
-
         // Else disable fly with a delay
         this.addon.getServer().getScheduler().runTaskLater(this.addon.getPlugin(), () -> {
 
@@ -81,8 +75,7 @@ public class FlyListener implements Listener {
             final IslandsManager islands = this.addon.getIslands();
 
             // Check player is not on his own island
-            if (!(islands.userIsOnIsland(user.getWorld(), user)
-                    && islands.getIslandAt(user.getLocation()).get().getMembers().containsKey(playerUUID))) {
+            if (!(islands.userIsOnIsland(Util.getWorld(user.getWorld()), user))) {
                 disableFly(user);
             }
             else {
