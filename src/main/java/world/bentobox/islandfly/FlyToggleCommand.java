@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.user.User;
+import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.bentobox.util.Util;
 
 
@@ -38,10 +39,25 @@ public class FlyToggleCommand extends CompositeCommand {
             return false;
         }
 
-        if (!user.hasPermission(this.getPermissionPrefix() + "island.flybypass") && !getIslands().userIsOnIsland(user.getWorld(), user)) {
-            user.sendMessage("islandfly.command.only-on-island");
+        Island island = getIslands().getIslandAt(user.getLocation()).orElse(null);
+
+        if (island == null) return false;
+
+        // Gets the island at User's location
+
+        // Enable fly if island is a spawn and user has permission for it
+        if (island.isSpawn()) {
+            if (user.hasPermission(this.getPermissionPrefix() + "island.flyspawn"))
+                return true;
+        }
+
+        if (!island.isAllowed(user, IslandFlyAddon.ISLAND_FLY_PROTECTION) && !user.hasPermission(this.getPermissionPrefix() + "island.flybypass")) {
+
+            user.sendMessage("islandfly.command.not-allowed-fly");
             return false;
         }
+
+
         return true;
     }
 
