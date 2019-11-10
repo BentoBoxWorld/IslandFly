@@ -44,7 +44,6 @@ public class FlyToggleCommand extends CompositeCommand {
         if (island == null) return false;
 
         // Gets the island at User's location
-        // If, statement above did return true, there is no need to check #isPresent
 
         // Enable fly if island is a spawn and user has permission for it
         if (island.isSpawn()) {
