@@ -8,3 +8,4 @@ islandfly:
   wrong-world: "&cSie befinden sich nicht in der richtigen Gamemode-Welt"
   command:
     only-on-island: "&cSie können nur auf Ihrer Insel fliegen."
+    description: ermöglicht es Ihnen, auf Ihrer Insel zu fliegen
