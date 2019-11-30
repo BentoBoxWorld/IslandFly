@@ -43,9 +43,9 @@ public class FlyListener implements Listener {
 
         final User user = User.getInstance(event.getPlayerUUID());
 
-        final Optional<Island> i = addon.getIslands().getIslandAt(user.getLocation());
+        final Island i = addon.getIslands().getIslandAt(user.getLocation()).orElse(null);
 
-        if (!i.isPresent()) return;
+        if (i == null) return;
 
         if (!user.getPlayer().getAllowFlight()) return;
 
@@ -92,7 +92,7 @@ public class FlyListener implements Listener {
             }
 
             // Check if player was reallowed to fly on the island he is at that moment
-            if (!is.isAllowed(user, IslandFlyAddon.ISLAND_FLY_PROTECTION)) {
+            if (!is.isAllowed(user, IslandFlyAddon.ISLAND_FLY_PROTECTION) || !is.onIsland(user.getLocation())) {
                 disableFly(user);
                 return;
             }
