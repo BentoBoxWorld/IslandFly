@@ -41,6 +41,9 @@ public class FlyListener implements Listener {
 
         final User user = User.getInstance(event.getPlayerUUID());
 
+        // Ignore ops
+        if (user.isOp()) return;
+
         // Alert player fly will be disabled
         final int flyTimeout = this.addon.getSettings().getFlyTimeout();
 
