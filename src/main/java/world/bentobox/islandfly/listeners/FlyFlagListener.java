@@ -3,7 +3,7 @@ package world.bentobox.islandfly.listeners;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import world.bentobox.bentobox.BentoBox;
+
 import world.bentobox.bentobox.api.events.flags.FlagProtectionChangeEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
@@ -12,11 +12,9 @@ import world.bentobox.islandfly.IslandFlyAddon;
 
 public class FlyFlagListener implements Listener {
 
-    private BentoBox plugin;
     private IslandFlyAddon addon;
 
     public FlyFlagListener(IslandFlyAddon addon) {
-        this.plugin = addon.getPlugin();
         this.addon = addon;
     }
 
@@ -31,12 +29,12 @@ public class FlyFlagListener implements Listener {
         // Stream through all of the flying and not allowed users at
         // the moment and warn them that their fly is about to turn off
         e.getIsland().getPlayersOnIsland().parallelStream()
-                .filter(Player::isFlying)
-                .filter(p -> !(island.isAllowed(User.getInstance(p), IslandFlyAddon.ISLAND_FLY_PROTECTION) || p.isOp()))
-                .forEach(p -> {
+        .filter(Player::isFlying)
+        .filter(p -> !(island.isAllowed(User.getInstance(p), IslandFlyAddon.ISLAND_FLY_PROTECTION) || p.isOp()))
+        .forEach(p -> {
 
-                    startDisabling(p, island);
-                });
+            startDisabling(p, island);
+        });
     }
 
     public void startDisabling(Player p, Island island) {
