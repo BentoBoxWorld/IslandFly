@@ -3,7 +3,8 @@
 #
 # This allows to define timeout in seconds on which fly mode will be disabled
 # when player leaves its island. Zero or negative number will result in immediate
-# fly mode disabling.
+# fly mode disabling. Players with the bskyblock.island.flybypass permission (or similar)
+# can fly outside the island boundary.
 fly-timeout: 5
 # 
 # This allows to change if players should lose their fly mode if they quit server.
