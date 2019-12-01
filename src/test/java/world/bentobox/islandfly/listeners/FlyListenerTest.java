@@ -100,6 +100,7 @@ public class FlyListenerTest {
         when(p.getLocation()).thenReturn(location);
         when(p.getWorld()).thenReturn(world);
         when(p.hasPermission(anyString())).thenReturn(false);
+        when(p.isOp()).thenReturn(false);
         when(p.isFlying()).thenReturn(true);
         User.setPlugin(plugin);
         User.getInstance(p);
@@ -159,6 +160,34 @@ public class FlyListenerTest {
      * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandEvent.IslandExitEvent)}.
      */
     @Test
+    public void testOnExitIslandGraceTimeOp() {
+        when(p.isOp()).thenReturn(true);
+        when(im.getProtectedIslandAt(any())).thenReturn(Optional.empty());
+        IslandExitEvent event = mock(IslandExitEvent.class);
+        when(event.getPlayerUUID()).thenReturn(uuid);
+        fl.onExitIsland(event);
+        verify(sch, never()).runTaskLater(eq(plugin), any(Runnable.class), any(Long.class));
+        verify(p, never()).sendMessage(anyString());
+    }
+
+    /**
+     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandEvent.IslandExitEvent)}.
+     */
+    @Test
+    public void testOnExitIslandGraceTimePermission() {
+        when(p.hasPermission(eq("bskyblock.island.flybypass"))).thenReturn(true);
+        when(im.getProtectedIslandAt(any())).thenReturn(Optional.empty());
+        IslandExitEvent event = mock(IslandExitEvent.class);
+        when(event.getPlayerUUID()).thenReturn(uuid);
+        fl.onExitIsland(event);
+        verify(sch, never()).runTaskLater(eq(plugin), any(Runnable.class), any(Long.class));
+        verify(p, never()).sendMessage(anyString());
+    }
+
+    /**
+     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandEvent.IslandExitEvent)}.
+     */
+    @Test
     public void testOnExitIslandGraceTimeNotFlying() {
         when(p.isFlying()).thenReturn(false);
         when(im.getProtectedIslandAt(any())).thenReturn(Optional.empty());
@@ -179,8 +208,8 @@ public class FlyListenerTest {
         IslandExitEvent event = mock(IslandExitEvent.class);
         when(event.getPlayerUUID()).thenReturn(uuid);
         fl.onExitIsland(event);
-        verify(sch, never()).runTaskLater(eq(plugin), any(Runnable.class), eq(100L));
-        verify(p, never()).sendMessage(eq("island.fly-outside-alert"));
+        verify(sch, never()).runTaskLater(eq(plugin), any(Runnable.class), any(Long.class));
+        verify(p).sendMessage(eq("islandfly.disable-fly"));
     }
 
     /**

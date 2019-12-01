@@ -42,7 +42,8 @@ public class FlyListener implements Listener {
         final User user = User.getInstance(event.getPlayerUUID());
 
         // Ignore ops
-        if (user.isOp()) return;
+        if (user.isOp() || this.addon.getPlugin().getIWM().getAddon(user.getWorld())
+                .map(a -> user.hasPermission(a.getPermissionPrefix() + "island.flybypass")).orElse(false)) return;
 
         // Alert player fly will be disabled
         final int flyTimeout = this.addon.getSettings().getFlyTimeout();
