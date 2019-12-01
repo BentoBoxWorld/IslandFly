@@ -1,5 +1,6 @@
 package world.bentobox.islandfly.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +13,7 @@ import world.bentobox.islandfly.IslandFlyAddon;
 
 public class FlyFlagListener implements Listener {
 
-    private IslandFlyAddon addon;
+    private final IslandFlyAddon addon;
 
     public FlyFlagListener(IslandFlyAddon addon) {
         this.addon = addon;
@@ -31,13 +32,10 @@ public class FlyFlagListener implements Listener {
         e.getIsland().getPlayersOnIsland().parallelStream()
         .filter(Player::isFlying)
         .filter(p -> !(island.isAllowed(User.getInstance(p), IslandFlyAddon.ISLAND_FLY_PROTECTION) || p.isOp()))
-        .forEach(p -> {
-
-            startDisabling(p, island);
-        });
+        .forEach(p -> startDisabling(p, island));
     }
 
-    public void startDisabling(Player p, Island island) {
+    private void startDisabling(Player p, Island island) {
 
         int flyTimeout = this.addon.getSettings().getFlyTimeout();
         User user = User.getInstance(p);
@@ -57,7 +55,7 @@ public class FlyFlagListener implements Listener {
         }
 
         // Else disable fly with a delay
-        addon.getServer().getScheduler().runTaskLater(this.addon.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskLater(this.addon.getPlugin(), () -> {
 
             // Verify that player is still online
             if (!user.isOnline()) return;

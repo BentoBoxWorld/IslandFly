@@ -17,7 +17,7 @@ public class FlyLogoutListener implements Listener {
     /**
      * IslandFlyAddon instance.
      */
-    private IslandFlyAddon addon;
+    private final IslandFlyAddon addon;
 
 
     /**

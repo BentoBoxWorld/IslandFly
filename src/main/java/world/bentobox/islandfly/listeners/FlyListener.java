@@ -20,7 +20,7 @@ public class FlyListener implements Listener {
     /**
      * Addon instance object.
      */
-    private IslandFlyAddon addon;
+    private final IslandFlyAddon addon;
 
 
     /**
@@ -107,7 +107,7 @@ public class FlyListener implements Listener {
 
     /**
      * Disable player fly and alert it
-     * @param user
+     * @param user - user to disable
      */
     private void disableFly(final User user) {
 

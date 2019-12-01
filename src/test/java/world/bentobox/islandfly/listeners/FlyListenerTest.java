@@ -62,7 +62,6 @@ public class FlyListenerTest {
     private Island island;
     @Mock
     private Island island2;
-    private Optional<Island> opIsland1;
     private Optional<Island> opIsland2;
     @Mock
     private Player p;
@@ -81,13 +80,12 @@ public class FlyListenerTest {
     private Settings settings;
 
     /**
-     * @throws java.lang.Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         // Island manager
         when(addon.getIslands()).thenReturn(im);
-        opIsland1 = Optional.of(island);
+        Optional<Island> opIsland1 = Optional.of(island);
         opIsland2 = Optional.of(island2);
         when(im.getProtectedIslandAt(any())).thenReturn(opIsland1);
         // Island
@@ -136,10 +134,9 @@ public class FlyListenerTest {
     }
 
     /**
-     * @throws java.lang.Exception
      */
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         User.clearUsers();
     }
 
