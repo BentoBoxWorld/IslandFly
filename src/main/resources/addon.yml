@@ -1,5 +1,5 @@
 name: IslandFly
-version: ${project.version}
+version: ${version}${build.number}
 main: world.bentobox.islandfly.IslandFlyAddon
 icon: FEATHER
 
