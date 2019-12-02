@@ -1,6 +1,7 @@
 package world.bentobox.islandfly;
 
 import org.bukkit.Material;
+
 import world.bentobox.bentobox.api.addons.Addon;
 import world.bentobox.bentobox.api.configuration.Config;
 import world.bentobox.bentobox.api.flags.Flag;
@@ -49,6 +50,7 @@ public class IslandFlyAddon extends Addon {
         // Save default config.yml
         this.saveDefaultConfig();
         // Load the plugin's config
+        this.settings = new Config<>(this, Settings.class).loadConfigObject();
         this.loadSettings();
     }
 
@@ -63,7 +65,7 @@ public class IslandFlyAddon extends Addon {
 
         if (this.hooked) {
             this.loadSettings();
-            this.getLogger().info("IslandFly addon reloaded.");
+            log("IslandFly addon reloaded.");
         }
     }
 
@@ -115,7 +117,6 @@ public class IslandFlyAddon extends Addon {
      * This method loads addon configuration settings in memory.
      */
     private void loadSettings() {
-        this.settings = new Config<>(this, Settings.class).loadConfigObject();
 
         if (this.settings == null) {
             // Disable
