@@ -46,8 +46,7 @@ public class FlyToggleCommand extends CompositeCommand {
         // Gets the island at User's location
 
         // Enable fly if island is a spawn and user has permission for it
-        if (island.isSpawn()) {
-            if (user.hasPermission(this.getPermissionPrefix() + "island.flyspawn"))
+        if (island.isSpawn() && user.hasPermission(this.getPermissionPrefix() + "island.flyspawn")) {
                 return true;
         }
 
