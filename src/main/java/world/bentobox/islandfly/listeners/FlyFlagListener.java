@@ -29,9 +29,12 @@ public class FlyFlagListener implements Listener {
 
         // Stream through all of the flying and not allowed users at
         // the moment and warn them that their fly is about to turn off
-        e.getIsland().getPlayersOnIsland().parallelStream()
+        island.getPlayersOnIsland()
+        .stream()
+        //.parallelStream()
         .filter(Player::isFlying)
-        .filter(p -> !(island.isAllowed(User.getInstance(p), IslandFlyAddon.ISLAND_FLY_PROTECTION) || p.isOp()))
+        .filter(p -> !p.isOp())
+        .filter(p -> !(island.isAllowed(User.getInstance(p), IslandFlyAddon.ISLAND_FLY_PROTECTION)))
         .forEach(p -> startDisabling(p, island));
     }
 
@@ -55,27 +58,28 @@ public class FlyFlagListener implements Listener {
         }
 
         // Else disable fly with a delay
-        Bukkit.getScheduler().runTaskLater(this.addon.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskLater(this.addon.getPlugin(), () -> disable(p, user, island), 20L* flyTimeout);
+    }
 
-            // Verify that player is still online
-            if (!user.isOnline()) return;
+    void disable(Player p, User user, Island island) {
 
-            // Check if user was reallowed to fly in the meantime
-            if (!island.isAllowed(user,IslandFlyAddon.ISLAND_FLY_PROTECTION)) {
+        // Verify that player is still online
+        if (!user.isOnline()) return;
 
-                // Silent cancel fly if player changed island in the meantime
-                // It will be the job of Enter/Exit island event to turn fly off if required
-                if (!island.onIsland(p.getLocation()))
-                    return;
+        // Check if user was reallowed to fly in the meantime
+        if (!island.isAllowed(user,IslandFlyAddon.ISLAND_FLY_PROTECTION)) {
 
-                p.setFlying(false);
-                p.setAllowFlight(false);
-                user.sendMessage("islandfly.disable-fly");
-            }
-            else {
-                user.sendMessage("islandfly.reallowed-fly");
-            }
+            // Silent cancel fly if player changed island in the meantime
+            // It will be the job of Enter/Exit island event to turn fly off if required
+            if (!island.onIsland(p.getLocation()))
+                return;
 
-        }, 20L* flyTimeout);
+            p.setFlying(false);
+            p.setAllowFlight(false);
+            user.sendMessage("islandfly.disable-fly");
+        }
+        else {
+            user.sendMessage("islandfly.reallowed-fly");
+        }
     }
 }
