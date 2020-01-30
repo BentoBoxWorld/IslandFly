@@ -1,0 +1,11 @@
+# Translation by: CZghost
+
+islandfly:
+  fly-outside-alert: "&cJsi mimo svůj ostrov, takže mód létání se vypne za &e[number]&c sekund."
+  disable-fly: "&cTvůj mód létání byl vypnut."
+  enable-fly: "&aTvůj mód létání byl zapnut."
+  cancel-disable: "&aJsi zpět, co? Palivo létání úspěšně doplněno!"
+  wrong-world: "&cNejsi ve správném světě herního módu"
+  command:
+    description: "povolí ti létat na tvém ostrově"
+    only-on-island: "&cMůžeš létat jen na tvém ostrově."
