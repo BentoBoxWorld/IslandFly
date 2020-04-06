@@ -1,10 +1,16 @@
 package world.bentobox.islandfly;
 
+import org.bukkit.Material;
+
 import world.bentobox.bentobox.api.addons.Addon;
 import world.bentobox.bentobox.api.configuration.Config;
+import world.bentobox.bentobox.api.flags.Flag;
+import world.bentobox.bentobox.managers.RanksManager;
 import world.bentobox.islandfly.config.Settings;
 import world.bentobox.islandfly.listeners.FlyDeathListener;
+import world.bentobox.islandfly.listeners.FlyFlagListener;
 import world.bentobox.islandfly.listeners.FlyListener;
+import world.bentobox.islandfly.listeners.FlyLoginListener;
 import world.bentobox.islandfly.listeners.FlyLogoutListener;
 
 
@@ -16,6 +22,17 @@ public class IslandFlyAddon extends Addon {
      * Settings object for IslandFlyAddon
      */
     private Settings settings;
+
+    /**
+     * A flag to allow or disallow flight on island
+     * based on player's rank
+     */
+    public static final Flag ISLAND_FLY_PROTECTION =
+            new Flag.Builder("ISLAND_FLY_PROTECTION", Material.ELYTRA)
+                    .type(Flag.Type.PROTECTION)
+                    .mode(Flag.Mode.ADVANCED)
+                    .defaultRank(RanksManager.MEMBER_RANK)
+                    .defaultSetting(true).build();
 
     /**
      * Boolean that indicate if addon is hooked into any gamemode.
@@ -34,6 +51,7 @@ public class IslandFlyAddon extends Addon {
         // Save default config.yml
         this.saveDefaultConfig();
         // Load the plugin's config
+        this.settings = new Config<>(this, Settings.class).loadConfigObject();
         this.loadSettings();
     }
 
@@ -48,7 +66,7 @@ public class IslandFlyAddon extends Addon {
 
         if (this.hooked) {
             this.loadSettings();
-            this.getLogger().info("IslandFly addon reloaded.");
+            log("IslandFly addon reloaded.");
         }
     }
 
@@ -68,6 +86,8 @@ public class IslandFlyAddon extends Addon {
                         new FlyToggleCommand(playerCommand);
                         hooked = true;
                     });
+
+                ISLAND_FLY_PROTECTION.addGameModeAddon(gameModeAddon);
             }
         });
 
@@ -77,6 +97,11 @@ public class IslandFlyAddon extends Addon {
             registerListener(new FlyListener(this));
             registerListener(new FlyDeathListener(this));
             registerListener(new FlyLogoutListener(this));
+            registerListener(new FlyLoginListener(this));
+            registerListener(new FlyFlagListener(this));
+
+            // Register a flag
+            registerFlag(ISLAND_FLY_PROTECTION);
         }
     }
 
@@ -94,7 +119,6 @@ public class IslandFlyAddon extends Addon {
      * This method loads addon configuration settings in memory.
      */
     private void loadSettings() {
-        this.settings = new Config<>(this, Settings.class).loadConfigObject();
 
         if (this.settings == null) {
             // Disable

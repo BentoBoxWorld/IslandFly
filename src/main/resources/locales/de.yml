@@ -1,0 +1,11 @@
+---
+islandfly:
+  fly-outside-alert: "&cSie befinden sich außerhalb Ihrer Insel, sodass der Flugmodus
+    in &c[number]&c Sekunden deaktiviert wird."
+  disable-fly: "&cFlugmodus wurde deaktiviert."
+  enable-fly: "&aFlugmodus wurde aktiviert."
+  cancel-disable: "&aDu bist zurück, huh! Flugtreibstoff erfolgreich nachgefüllt!"
+  wrong-world: "&cSie befinden sich nicht in der richtigen Gamemode-Welt"
+  command:
+    only-on-island: "&cSie können nur auf Ihrer Insel fliegen."
+    description: ermöglicht es Ihnen, auf Ihrer Insel zu fliegen

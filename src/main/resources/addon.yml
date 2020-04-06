@@ -1,5 +1,5 @@
 name: IslandFly
-version: ${project.version}
+version: ${version}${build.number}
 main: world.bentobox.islandfly.IslandFlyAddon
 icon: FEATHER
 
@@ -11,6 +11,9 @@ description: Allow players to fly on their island
 
 
 permissions:
+  acidisland.island.flyspawn:
+    description: Allows to use fly on spawn
+    default: op
   acidisland.island.fly:
     description: Allows access to fly command.
     default: true
@@ -18,6 +21,9 @@ permissions:
     description: Allows to keep fly mode on player death.
     default: op
 
+  bskyblock.island.flyspawn:
+    description: Allows to use fly on spawn
+    default: op
   bskyblock.island.fly:
     description: Allows access to fly command.
     default: true
@@ -25,6 +31,9 @@ permissions:
     description: Allows to keep fly mode on player death.
     default: op
 
+  caveblock.island.flyspawn:
+    description: Allows to use fly on spawn
+    default: op
   caveblock.island.fly:
     description: Allows access to fly command.
     default: true
@@ -32,6 +41,9 @@ permissions:
     description: Allows to keep fly mode on player death.
     default: op
 
+  skygrid.island.flyspawn:
+    description: Allows to use fly on spawn
+    default: op
   skygrid.island.fly:
     description: Allows access to fly command.
     default: true
