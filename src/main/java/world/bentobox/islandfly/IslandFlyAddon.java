@@ -10,6 +10,7 @@ import world.bentobox.islandfly.config.Settings;
 import world.bentobox.islandfly.listeners.FlyDeathListener;
 import world.bentobox.islandfly.listeners.FlyFlagListener;
 import world.bentobox.islandfly.listeners.FlyListener;
+import world.bentobox.islandfly.listeners.FlyLoginListener;
 import world.bentobox.islandfly.listeners.FlyLogoutListener;
 
 
@@ -96,6 +97,7 @@ public class IslandFlyAddon extends Addon {
             registerListener(new FlyListener(this));
             registerListener(new FlyDeathListener(this));
             registerListener(new FlyLogoutListener(this));
+            registerListener(new FlyLoginListener(this));
             registerListener(new FlyFlagListener(this));
 
             // Register a flag

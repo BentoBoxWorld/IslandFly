@@ -40,6 +40,7 @@ public class FlyLogoutListener implements Listener {
 
         if (player.getAllowFlight() && this.addon.getSettings().isFlyDisableOnLogout())
         {
+            addon.logWarning("Disabling flight");
             // Disable fly
             player.setFlying(false);
             player.setAllowFlight(false);
