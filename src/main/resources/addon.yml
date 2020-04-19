@@ -3,10 +3,10 @@ version: ${version}${build.number}
 main: world.bentobox.islandfly.IslandFlyAddon
 icon: FEATHER
 
-softdepend: AcidIsland, BSkyBlock, CaveBlock, SkyGrid
+softdepend: AcidIsland, BSkyBlock, CaveBlock, SkyGrid, AOneBlock
 
 
-authors: [DarkRails]
+authors: [DarkRails, tastybento]
 description: Allow players to fly on their island
 
 
@@ -48,5 +48,15 @@ permissions:
     description: Allows access to fly command.
     default: true
   skygrid.island.flybypass:
+    description: Allows to keep fly mode on player death.
+    default: op
+    
+  aoneblock.island.flyspawn:
+    description: Allows to use fly on spawn
+    default: op
+  aoneblock.island.fly:
+    description: Allows access to fly command.
+    default: true
+  aoneblock.island.flybypass:
     description: Allows to keep fly mode on player death.
     default: op
