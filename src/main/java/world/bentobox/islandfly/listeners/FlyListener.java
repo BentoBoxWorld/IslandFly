@@ -40,11 +40,11 @@ public class FlyListener implements Listener {
     public void onExitIsland(final IslandEvent.IslandExitEvent event) {
 
         final User user = User.getInstance(event.getPlayerUUID());
-
+        String permPrefix = addon.getPlugin().getIWM().getPermissionPrefix(user.getWorld());
         // Ignore ops
-        if (user.isOp() || this.addon.getPlugin().getIWM().getAddon(user.getWorld())
-                .map(a -> user.hasPermission(a.getPermissionPrefix() + "island.flybypass")).orElse(false)) return;
-
+        if (user.isOp() || user.hasPermission(permPrefix + "island.flybypass")
+                || (!user.hasPermission(permPrefix + "island.fly")
+                        && !user.hasPermission(permPrefix + "island.flyspawn"))) return;
         // Alert player fly will be disabled
         final int flyTimeout = this.addon.getSettings().getFlyTimeout();
 
@@ -55,8 +55,9 @@ public class FlyListener implements Listener {
         }
 
         // Else disable fly with a delay
-        if (user.getPlayer().isFlying())
+        if (user.getPlayer().isFlying()) {
             user.sendMessage("islandfly.fly-outside-alert", TextVariables.NUMBER, String.valueOf(flyTimeout));
+        }
 
         Bukkit.getScheduler().runTaskLater(this.addon.getPlugin(), () -> removeFly(user), 20L* flyTimeout);
     }
@@ -112,9 +113,10 @@ public class FlyListener implements Listener {
     private void disableFly(final User user) {
 
         final Player player = user.getPlayer();
+        if (player.isFlying())
+            user.sendMessage("islandfly.disable-fly");
 
         player.setFlying(false);
         player.setAllowFlight(false);
-        user.sendMessage("islandfly.disable-fly");
     }
 }

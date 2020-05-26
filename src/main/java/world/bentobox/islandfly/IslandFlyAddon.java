@@ -29,10 +29,10 @@ public class IslandFlyAddon extends Addon {
      */
     public static final Flag ISLAND_FLY_PROTECTION =
             new Flag.Builder("ISLAND_FLY_PROTECTION", Material.ELYTRA)
-                    .type(Flag.Type.PROTECTION)
-                    .mode(Flag.Mode.ADVANCED)
-                    .defaultRank(RanksManager.MEMBER_RANK)
-                    .defaultSetting(true).build();
+            .type(Flag.Type.PROTECTION)
+            .mode(Flag.Mode.ADVANCED)
+            .defaultRank(RanksManager.MEMBER_RANK)
+            .defaultSetting(true).build();
 
     /**
      * Boolean that indicate if addon is hooked into any gamemode.
@@ -77,15 +77,16 @@ public class IslandFlyAddon extends Addon {
     @Override
     public void onEnable() {
         //Hook into gamemodes
-
         this.getPlugin().getAddonsManager().getGameModeAddons().forEach(gameModeAddon -> {
             if (!this.settings.getDisabledGameModes().contains(gameModeAddon.getDescription().getName()))
             {
+                getPlugin().log("Hooking into " + gameModeAddon.getDescription().getName());
+
                 gameModeAddon.getPlayerCommand().ifPresent(
-                    playerCommand -> {
-                        new FlyToggleCommand(playerCommand);
-                        hooked = true;
-                    });
+                        playerCommand -> {
+                            new FlyToggleCommand(playerCommand);
+                            hooked = true;
+                        });
 
                 ISLAND_FLY_PROTECTION.addGameModeAddon(gameModeAddon);
             }

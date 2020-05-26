@@ -97,7 +97,7 @@ public class FlyListenerTest {
         when(p.isOnline()).thenReturn(true);
         when(p.getLocation()).thenReturn(location);
         when(p.getWorld()).thenReturn(world);
-        when(p.hasPermission(anyString())).thenReturn(false);
+        when(p.hasPermission(eq("bskyblock.island.fly"))).thenReturn(true);
         when(p.isOp()).thenReturn(false);
         when(p.isFlying()).thenReturn(true);
         User.setPlugin(plugin);
@@ -107,13 +107,14 @@ public class FlyListenerTest {
         when(user.isOnline()).thenReturn(true);
         when(user.getLocation()).thenReturn(location);
         when(user.getWorld()).thenReturn(world);
-        when(user.hasPermission(anyString())).thenReturn(false);
+        when(user.hasPermission(eq("bskyblock.island.fly"))).thenReturn(true);
         // IWM
         when(addon.getPlugin()).thenReturn(plugin);
         when(plugin.getIWM()).thenReturn(iwm);
         Optional<GameModeAddon> opGm = Optional.of(gameMode);
         when(gameMode.getPermissionPrefix()).thenReturn("bskyblock.");
         when(iwm.getAddon(any())).thenReturn(opGm);
+        when(iwm.getPermissionPrefix(any())).thenReturn("bskyblock.");
         // Bukkit
         PowerMockito.mockStatic(Bukkit.class);
         when(Bukkit.getScheduler()).thenReturn(sch);
@@ -186,6 +187,7 @@ public class FlyListenerTest {
      */
     @Test
     public void testOnExitIslandGraceTimeNotFlying() {
+        when(user.hasPermission(eq("bskyblock.island.fly"))).thenReturn(true);
         when(p.isFlying()).thenReturn(false);
         when(im.getProtectedIslandAt(any())).thenReturn(Optional.empty());
         IslandExitEvent event = mock(IslandExitEvent.class);
@@ -208,6 +210,22 @@ public class FlyListenerTest {
         verify(sch, never()).runTaskLater(eq(plugin), any(Runnable.class), any(Long.class));
         verify(p).sendMessage(eq("islandfly.disable-fly"));
     }
+
+    /**
+     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandEvent.IslandExitEvent)}.
+     */
+    @Test
+    public void testOnExitIslandNoGraceTimeNoPermission() {
+        when(p.hasPermission(eq("bskyblock.island.fly"))).thenReturn(false);
+        when(im.getProtectedIslandAt(any())).thenReturn(Optional.empty());
+        when(settings.getFlyTimeout()).thenReturn(0);
+        IslandExitEvent event = mock(IslandExitEvent.class);
+        when(event.getPlayerUUID()).thenReturn(uuid);
+        fl.onExitIsland(event);
+        verify(sch, never()).runTaskLater(eq(plugin), any(Runnable.class), any(Long.class));
+        verify(p, never()).sendMessage(eq("islandfly.disable-fly"));
+    }
+
 
     /**
      * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#removeFly(world.bentobox.bentobox.api.user.User)}.
