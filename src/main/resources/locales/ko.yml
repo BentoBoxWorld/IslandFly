@@ -9,6 +9,7 @@ islandfly:
   wrong-world: "&c 당신은 올바른 게임 모드 세계에 있지 않습니다"
   command:
     not-allowed-fly: "&c 이 섬을 비행 할 수 없습니다"
+    description: 당신은 당신의 섬에 비행 할 수 있습니다
 protection:
   flags:
     ISLAND_FLY_PROTECTION:
