@@ -10,6 +10,8 @@ islandfly:
   wrong-world: "&c Você não está no mundo do modo de jogo certo"
   command:
     not-allowed-fly: "&c Você não tem permissão para voar nesta ilha"
+    description: permite que você voe em sua ilha
+  cancel-disable: Você está de volta, hein! Voar combustível reabastecido com sucesso!
 protection:
   flags:
     ISLAND_FLY_PROTECTION:
