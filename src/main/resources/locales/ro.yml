@@ -11,6 +11,7 @@ islandfly:
   wrong-world: "&c Nu sunteți în lumea gamemode potrivită"
   command:
     not-allowed-fly: "&c Nu aveți voie să zburați pe această insulă"
+    description: vă permite să zburați pe insula voastră
 protection:
   flags:
     ISLAND_FLY_PROTECTION:
