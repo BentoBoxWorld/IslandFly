@@ -11,6 +11,7 @@ islandfly:
   wrong-world: "&c Nie jesteś we właściwym świecie trybu gry"
   command:
     not-allowed-fly: "&c Nie wolno latać na tej wyspie"
+    description: pozwala latać na swojej wyspie
 protection:
   flags:
     ISLAND_FLY_PROTECTION:
