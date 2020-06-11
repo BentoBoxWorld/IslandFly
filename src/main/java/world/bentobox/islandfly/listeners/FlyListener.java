@@ -1,6 +1,7 @@
 package world.bentobox.islandfly.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -42,7 +43,9 @@ public class FlyListener implements Listener {
         final User user = User.getInstance(event.getPlayerUUID());
         String permPrefix = addon.getPlugin().getIWM().getPermissionPrefix(user.getWorld());
         // Ignore ops
-        if (user.isOp() || user.hasPermission(permPrefix + "island.flybypass")
+        if (user.isOp() || user.getPlayer().getGameMode().equals(GameMode.CREATIVE)
+                || user.getPlayer().getGameMode().equals(GameMode.SPECTATOR)
+                || user.hasPermission(permPrefix + "island.flybypass")
                 || (!user.hasPermission(permPrefix + "island.fly")
                         && !user.hasPermission(permPrefix + "island.flyspawn"))) return;
         // Alert player fly will be disabled

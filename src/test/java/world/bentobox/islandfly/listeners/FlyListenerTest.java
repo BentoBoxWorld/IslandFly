@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -100,6 +101,7 @@ public class FlyListenerTest {
         when(p.hasPermission(eq("bskyblock.island.fly"))).thenReturn(true);
         when(p.isOp()).thenReturn(false);
         when(p.isFlying()).thenReturn(true);
+        when(p.getGameMode()).thenReturn(GameMode.SURVIVAL);
         User.setPlugin(plugin);
         User.getInstance(p);
         when(user.getUniqueId()).thenReturn(uuid);
@@ -221,6 +223,24 @@ public class FlyListenerTest {
         when(settings.getFlyTimeout()).thenReturn(0);
         IslandExitEvent event = mock(IslandExitEvent.class);
         when(event.getPlayerUUID()).thenReturn(uuid);
+        fl.onExitIsland(event);
+        verify(sch, never()).runTaskLater(eq(plugin), any(Runnable.class), any(Long.class));
+        verify(p, never()).sendMessage(eq("islandfly.disable-fly"));
+    }
+
+    /**
+     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandEvent.IslandExitEvent)}.
+     */
+    @Test
+    public void testOnExitIslandNoGraceTimeCreativeOrSpectator() {
+        when(p.getGameMode()).thenReturn(GameMode.CREATIVE);
+        when(im.getProtectedIslandAt(any())).thenReturn(Optional.empty());
+        when(settings.getFlyTimeout()).thenReturn(0);
+        IslandExitEvent event = mock(IslandExitEvent.class);
+        when(event.getPlayerUUID()).thenReturn(uuid);
+        fl.onExitIsland(event);
+        // Spectator
+        when(p.getGameMode()).thenReturn(GameMode.SPECTATOR);
         fl.onExitIsland(event);
         verify(sch, never()).runTaskLater(eq(plugin), any(Runnable.class), any(Long.class));
         verify(p, never()).sendMessage(eq("islandfly.disable-fly"));
