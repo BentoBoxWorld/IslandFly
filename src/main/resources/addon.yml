@@ -2,7 +2,7 @@ name: IslandFly
 version: ${version}${build.number}
 main: world.bentobox.islandfly.IslandFlyAddon
 icon: FEATHER
-api-version: 1.13
+api-version: 1.15.4
 
 softdepend: AcidIsland, BSkyBlock, CaveBlock, SkyGrid, AOneBlock
 
