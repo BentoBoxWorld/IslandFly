@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
-import world.bentobox.bentobox.api.events.island.IslandEvent;
+import world.bentobox.bentobox.api.events.island.IslandExitEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
@@ -38,7 +38,7 @@ public class FlyListener implements Listener {
      * @param event instance of IslandEvent.IslandExitEvent
      */
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-    public void onExitIsland(final IslandEvent.IslandExitEvent event) {
+    public void onExitIsland(final IslandExitEvent event) {
 
         final User user = User.getInstance(event.getPlayerUUID());
         String permPrefix = addon.getPlugin().getIWM().getPermissionPrefix(user.getWorld());
