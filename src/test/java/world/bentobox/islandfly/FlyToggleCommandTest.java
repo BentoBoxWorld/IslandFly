@@ -112,7 +112,7 @@ public class FlyToggleCommandTest {
         Optional<Island> opIsland = Optional.of(island);
         when(im.getIslandAt(any())).thenReturn(opIsland);
         
-        ftc = new FlyToggleCommand(ic);
+        ftc = new FlyToggleCommand(ic, addon);
     }
 
     /**
@@ -203,7 +203,7 @@ public class FlyToggleCommandTest {
     /**
      * Test method for {@link world.bentobox.islandfly.FlyToggleCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
-    @Test
+    @Test //I don't know what to do here
     public void testExecuteUserStringListOfStringAllowedFlight() {
         when(p.getAllowFlight()).thenReturn(true);
         ftc.execute(user, "fly", Collections.emptyList());

@@ -99,6 +99,30 @@ public class Settings implements ConfigObject
     {
         this.disabledGameModes = disabledGameModes;
     }
+    
+    
+    
+    
+    /**
+     * Method Settings#isFlyDisableOnLogout returns the flyDisableOnLogout of this object.
+     *
+     * @return the flyDisableOnLogout (type boolean) of this object.
+     */
+    public boolean isAllowCommandOutsideProtectionRange()
+    {
+        return allowCommandOutsideProtectionRange;
+    }
+
+
+    /**
+     * Method Settings#setFlyDisableOnLogout sets new value for the flyDisableOnLogout of this object.
+     * @param flyDisableOnLogout new value for this object.
+     *
+     */
+    public void setAllowCommandOutsideProtectionRange(boolean commandAllowed)
+    {
+        this.allowCommandOutsideProtectionRange = commandAllowed;
+    }
 
 
     // ---------------------------------------------------------------------
@@ -125,4 +149,9 @@ public class Settings implements ConfigObject
     @ConfigComment(" - BSkyBlock")
     @ConfigEntry(path = "disabled-gamemodes")
     private Set<String> disabledGameModes = new HashSet<>();
+    
+    @ConfigComment("")
+    @ConfigComment("This allows the player to use the command outside the island protection range.")
+    @ConfigEntry(path = "allow-command-outside-protection-range")
+    private boolean allowCommandOutsideProtectionRange = false;
 }
