@@ -2,8 +2,8 @@
 islandfly:
   fly-outside-alert: "&c Está fuera de su isla, por lo que el modo de vuelo se desactivará
     en &e [number] &c segundos."
-  fly-turning-off-alert: "&c You are not permitted to fly here anymore. Turning fly
-    off in &e[number] &c seconds."
+  fly-turning-off-alert: "&c Ya no puedes volar aquí. Desactivar volar en &e [number]
+    &c segundos."
   disable-fly: "&c Su modo de vuelo ha sido deshabilitado."
   reallowed-fly: "&a Your fly has been reallowed"
   enable-fly: "&a Su modo de vuelo ha sido habilitado."
