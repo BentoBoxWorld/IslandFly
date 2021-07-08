@@ -2,10 +2,10 @@
 islandfly:
   fly-outside-alert: "&cJsi mimo svůj ostrov, takže mód létání se vypne za &e[number]&c
     sekund."
-  fly-turning-off-alert: "&c You are not permitted to fly here anymore. Turning fly
-    off in &e[number] &c seconds."
+  fly-turning-off-alert: "&c Už zde nesmíte létat. Vypnutí letu za &e [number] &c
+    sekundy."
   disable-fly: "&cTvůj mód létání byl vypnut."
-  reallowed-fly: "&a Your fly has been reallowed"
+  reallowed-fly: "&a Vaše moucha byla reallowed"
   enable-fly: "&aTvůj mód létání byl zapnut."
   cancel-disable: "&aJsi zpět, co? Palivo létání úspěšně doplněno!"
   wrong-world: "&cNejsi ve správném světě herního módu"
