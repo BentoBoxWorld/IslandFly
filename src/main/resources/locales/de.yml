@@ -5,13 +5,13 @@ islandfly:
   fly-turning-off-alert: "&c Du darfst hier nicht mehr fliegen. Ausschalten der Fliege
     in &e [number] &c Sekunden."
   disable-fly: "&cFlugmodus wurde deaktiviert."
-  reallowed-fly: "&a Your fly has been reallowed"
+  reallowed-fly: "&a Deine Fliege wurde neu zugelassen"
   enable-fly: "&aFlugmodus wurde aktiviert."
   cancel-disable: "&aDu bist zurück, huh! Flugtreibstoff erfolgreich nachgefüllt!"
   wrong-world: "&cSie befinden sich nicht in der richtigen Gamemode-Welt"
   command:
     description: ermöglicht es Ihnen, auf Ihrer Insel zu fliegen
-    not-allowed-fly: "&c You are not allowed to fly on this island"
+    not-allowed-fly: "&c Du darfst nicht auf dieser Insel fliegen"
     only-on-island: "&cSie können nur auf Ihrer Insel fliegen."
 protection:
   flags:
