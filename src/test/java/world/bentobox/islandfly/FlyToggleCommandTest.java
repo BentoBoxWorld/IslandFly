@@ -20,6 +20,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.util.BoundingBox;
+import org.bukkit.util.Vector;
 import org.eclipse.jdt.annotation.Nullable;
 import org.junit.After;
 import org.junit.Before;
@@ -38,6 +40,7 @@ import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.bentobox.managers.CommandsManager;
 import world.bentobox.bentobox.managers.IslandsManager;
 import world.bentobox.bentobox.util.Util;
+import world.bentobox.islandfly.config.Settings;
 
 /**
  * @author tastybento
@@ -46,7 +49,7 @@ import world.bentobox.bentobox.util.Util;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Bukkit.class, BentoBox.class, Util.class})
 public class FlyToggleCommandTest {
-    
+
     @Mock
     private CompositeCommand ic;
     private UUID uuid;
@@ -65,12 +68,15 @@ public class FlyToggleCommandTest {
     private @Nullable Location location;
     @Mock
     private Island island;
-    
-    
+    private Settings settings;
+    @Mock
+    private BoundingBox box;
+
+
     /**
      * @throws java.lang.Exception
      */
-    
+
     @Before
     public void setUp() throws Exception {
         // Set up plugin
@@ -102,16 +108,26 @@ public class FlyToggleCommandTest {
         when(user.getPermissionValue(anyString(), anyInt())).thenReturn(-1);
         when(user.isPlayer()).thenReturn(true);
         when(user.getLocation()).thenReturn(location);
-        
+
         // Util
         PowerMockito.mockStatic(Util.class);
         when(Util.getWorld(any())).thenReturn(world);
-        
+
         // Island Manager
         when(plugin.getIslands()).thenReturn(im);
         Optional<Island> opIsland = Optional.of(island);
         when(im.getIslandAt(any())).thenReturn(opIsland);
-        
+
+        // Settings
+        settings = new Settings();
+        when(addon.getSettings()).thenReturn(settings);
+
+        // Island
+        when(island.getProtectionBoundingBox()).thenReturn(box);
+        when(location.toVector()).thenReturn(new Vector(0,60,0));
+        // Locations are always inside the box for now
+        when(box.contains(any(Vector.class))).thenReturn(true);
+
         ftc = new FlyToggleCommand(ic, addon);
     }
 
@@ -148,7 +164,7 @@ public class FlyToggleCommandTest {
         when(Util.getWorld(any())).thenReturn(mock(World.class));
         assertFalse(ftc.canExecute(user, "fly", Collections.emptyList()));
         verify(user).sendMessage(eq("islandfly.wrong-world"));
-        
+
     }
     /**
      * Test method for {@link world.bentobox.islandfly.FlyToggleCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
@@ -157,7 +173,7 @@ public class FlyToggleCommandTest {
     public void testCanExecuteNoIsland() {
         when(im.getIslandAt(any())).thenReturn(Optional.empty());
         assertFalse(ftc.canExecute(user, "fly", Collections.emptyList()));
-        
+
     }
     /**
      * Test method for {@link world.bentobox.islandfly.FlyToggleCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
@@ -166,9 +182,9 @@ public class FlyToggleCommandTest {
     public void testCanExecuteSpawn() {
         when(island.isSpawn()).thenReturn(true);
         when(user.hasPermission(eq("bskyblock.island.flyspawn"))).thenReturn(true);
-        assertTrue(ftc.canExecute(user, "fly", Collections.emptyList()));     
+        assertTrue(ftc.canExecute(user, "fly", Collections.emptyList()));
     }
-    
+
     /**
      * Test method for {@link world.bentobox.islandfly.FlyToggleCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
@@ -177,7 +193,7 @@ public class FlyToggleCommandTest {
         when(island.isAllowed(eq(user), any())).thenReturn(false);
         when(user.hasPermission(anyString())).thenReturn(false);
         assertFalse(ftc.canExecute(user, "fly", Collections.emptyList()));
-        verify(user).sendMessage(eq("islandfly.command.not-allowed-fly"));   
+        verify(user).sendMessage(eq("islandfly.command.not-allowed-fly"));
     }
     /**
      * Test method for {@link world.bentobox.islandfly.FlyToggleCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
@@ -187,7 +203,7 @@ public class FlyToggleCommandTest {
         when(island.isAllowed(eq(user), any())).thenReturn(false);
         when(user.hasPermission(anyString())).thenReturn(true);
         assertTrue(ftc.canExecute(user, "fly", Collections.emptyList()));
-        verify(user, never()).sendMessage(eq("islandfly.command.not-allowed-fly"));        
+        verify(user, never()).sendMessage(anyString());
     }
     /**
      * Test method for {@link world.bentobox.islandfly.FlyToggleCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
@@ -197,7 +213,32 @@ public class FlyToggleCommandTest {
         when(island.isAllowed(eq(user), any())).thenReturn(true);
         when(user.hasPermission(anyString())).thenReturn(false);
         assertTrue(ftc.canExecute(user, "fly", Collections.emptyList()));
-        verify(user, never()).sendMessage(eq("islandfly.command.not-allowed-fly"));        
+        verify(user, never()).sendMessage(anyString());
+    }
+
+    /**
+     * Test method for {@link world.bentobox.islandfly.FlyToggleCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
+     */
+    @Test
+    public void testCanExecuteOutsideProtectionRange() {
+        when(island.isAllowed(eq(user), any())).thenReturn(true);
+        when(user.hasPermission(anyString())).thenReturn(false);
+        when(box.contains(any(Vector.class))).thenReturn(false);
+        assertFalse(ftc.canExecute(user, "fly", Collections.emptyList()));
+        verify(user).sendMessage(eq("islandfly.outside-protection-range"));
+    }
+
+    /**
+     * Test method for {@link world.bentobox.islandfly.FlyToggleCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
+     */
+    @Test
+    public void testCanExecuteOutsideProtectionRangeCommandAllowed() {
+        settings.setAllowCommandOutsideProtectionRange(true);
+        when(island.isAllowed(eq(user), any())).thenReturn(true);
+        when(user.hasPermission(anyString())).thenReturn(false);
+        when(box.contains(any(Vector.class))).thenReturn(false);
+        assertTrue(ftc.canExecute(user, "fly", Collections.emptyList()));
+        verify(user, never()).sendMessage(anyString());
     }
 
     /**
