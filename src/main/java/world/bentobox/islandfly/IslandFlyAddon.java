@@ -84,7 +84,7 @@ public class IslandFlyAddon extends Addon {
 
                 gameModeAddon.getPlayerCommand().ifPresent(
                         playerCommand -> {
-                            new FlyToggleCommand(playerCommand);
+                            new FlyToggleCommand(playerCommand, this);
                             hooked = true;
                         });
 

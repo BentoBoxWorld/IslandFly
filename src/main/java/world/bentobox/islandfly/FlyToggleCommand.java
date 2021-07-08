@@ -8,18 +8,24 @@ import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.bentobox.util.Util;
+import world.bentobox.islandfly.config.Settings;
 
 
 /**
  * This command allows to enable and disable fly mode.
  */
 public class FlyToggleCommand extends CompositeCommand {
+	
+	
+	private Settings settings;
+	
     /**
      * Default constructor
      * @param parent Instance of CompositeCommand
      */
-    public FlyToggleCommand(CompositeCommand parent) {
+    public FlyToggleCommand(CompositeCommand parent, IslandFlyAddon addon) {
         super(parent, "fly");
+        this.settings = addon.getSettings();
     }
 
 
@@ -54,6 +60,14 @@ public class FlyToggleCommand extends CompositeCommand {
 
             user.sendMessage("islandfly.command.not-allowed-fly");
             return false;
+        }
+        
+        
+        if ( !this.settings.isAllowCommandOutsideProtectionRange() && !island.getProtectionBoundingBox().contains(user.getLocation().toVector())) {
+        	
+        	user.sendMessage("islandfly.outside-protection-range");
+        	return false;
+        	
         }
 
 
