@@ -16,5 +16,5 @@ islandfly:
 protection:
   flags:
     ISLAND_FLY_PROTECTION:
-      description: "&a Toggle who can fly on your island"
-      name: "&a Fly prevention"
+      description: "&a Toggle qui peut voler sur votre île"
+      name: "&a Prévention des mouches"
