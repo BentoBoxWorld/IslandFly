@@ -1,19 +1,18 @@
----
 islandfly:
-  fly-outside-alert: "&c Bạn đang ở ngoài đảo nên chế độ bay sẽ bị tắt trong &e [number]
-    &c giây."
-  fly-turning-off-alert: "&c Bạn không được phép bay ở đây nữa. Tắt bay trong &e [number]
-    &c giây."
-  disable-fly: "&c Chế độ bay của bạn đã bị tắt."
-  reallowed-fly: "&a Bạn có thể bay ngay bây giờ"
-  enable-fly: "&a Chế độ bay của bạn đã được bật."
-  cancel-disable: "&a Bạn đã trở lại, huh! Bay nhiên liệu nạp lại thành công!"
-  wrong-world: "&c Bạn không ở trong thế giới gamemode phù hợp"
+  fly-outside-alert: "&c Bạn đã ra ngoài đảo nên chế độ bay sẽ tắt trong &e[number] &c giây."
+  fly-turning-off-alert: "&c Bạn không có quyền bay ở đây nữa. Sẽ tắt bay trong &e[number] &c giây."
+  disable-fly: "&c Chế độ bay của bạn đã tắt."
+  reallowed-fly: "&a Chế độ bay của bạn đã được cho phép"
+  enable-fly: "&a Chế độ bay của bạn đã bật."
+  cancel-disable: "&a Bạn quay lại rồi à! Nhiên liệu bay đã được nạp đầy!"
+  wrong-world: "&c Bạn ở không đúng thế giới"
+  outside-protection-range: "&c Bạn không được phép làm điều đó ngoài vùng an toàn của b"
   command:
-    not-allowed-fly: "&c Bạn không được phép bay trên đảo này"
-    description: cho phép bạn bay trên đảo của bạn
+    description: "cho phép bay tại đảo của bạn"
+    not-allowed-fly: "&c Bạn không được phép bay tại đảo này"
+
 protection:
   flags:
     ISLAND_FLY_PROTECTION:
-      description: "&a Toggle người có thể bay trên đảo của bạn"
-      name: "&a Phòng chống bay"
+      description: "&a Bật/tắt những người có thể bay"
+      name: "&a Bảo vệ khỏi người đang bay"
