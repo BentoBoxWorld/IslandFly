@@ -1,19 +1,16 @@
 ---
 islandfly:
-  fly-turning-off-alert: "&c Vous n'êtes plus autorisé à voler ici. Désactivation du vol dans &e [number] &c secondes."
-  reallowed-fly: "&a Vous pouvez de nouveau voler"
-  outside-protection-range: "&c Tu ne peux pas faire ça en dehors de la zone de protection de ton île"
-  fly-outside-alert: "&cVous êtes hors de votre île, vous ne pourrez plus voler dans &e[number]&c secondes."
+  fly-outside-alert: "&cVous êtes hors de votre île, vous ne pourrez plus voler dans
+    &e[number]&c secondes."
   disable-fly: "&cVous ne pouvez plus voler."
   enable-fly: "&aVous pouvez désormais voler."
   cancel-disable: "&aVous êtes de retour sur votre île ! Vous pouvez continuer à voler."
   wrong-world: "&cVous n'êtes pas dans le bon monde de mode de jeu."
+  outside-protection-range: "&c Tu ne peux pas faire ça en dehors de la zone de protection
+    de ton île"
   command:
     description: vous permet de voler sur votre île
-    not-allowed-fly: "&c Vous n'êtes pas autorisé à voler sur cette île"
     only-on-island: "&cVous pouvez uniquement voler sur votre île."
 protection:
   flags:
-    ISLAND_FLY_PROTECTION:
-      description: "&a Toggle qui peut voler sur votre île"
-      name: "&a Interdiction du vol"
+    ISLAND_FLY_PROTECTION: {}
