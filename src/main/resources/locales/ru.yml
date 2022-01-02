@@ -9,9 +9,11 @@ islandfly:
   enable-fly: "&a Ваш режим полета был включен."
   cancel-disable: "&a Вы вернулись, да! Летное топливо успешно заправлено!"
   wrong-world: "&c Вы не в правильном игровом мире"
+  outside-protection-range: "&c Вам не разрешено делать это за пределами зоны защиты
+    вашего острова."
   command:
-    not-allowed-fly: "&c Вы не можете летать на этом острове"
     description: позволяет летать на вашем острове
+    not-allowed-fly: "&c Вы не можете летать на этом острове"
 protection:
   flags:
     ISLAND_FLY_PROTECTION:
