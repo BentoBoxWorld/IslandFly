@@ -9,6 +9,7 @@ islandfly:
   enable-fly: "&aFlugmodus wurde aktiviert."
   cancel-disable: "&aDu bist zurück, huh! Flugtreibstoff erfolgreich nachgefüllt!"
   wrong-world: "&cSie befinden sich nicht in der richtigen Gamemode-Welt"
+  outside-protection-range: "&c Das darfst du nicht außerhalb deines Inselschutzbereichs"
   command:
     description: ermöglicht es Ihnen, auf Ihrer Insel zu fliegen
     not-allowed-fly: "&c Du darfst nicht auf dieser Insel fliegen"
