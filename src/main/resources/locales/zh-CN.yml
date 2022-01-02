@@ -7,6 +7,7 @@ islandfly:
   enable-fly: 您的[岛屿飞行]已启用。
   cancel-disable: 您已回到岛屿
   wrong-world: 您不在正确的游戏模式世界中
+  outside-protection-range: "&c 你不能在你的岛屿保护范围外这样做"
   command:
     description: '允许你在你的岛上飞行 '
     not-allowed-fly: 您不被允许在这个岛上飞
