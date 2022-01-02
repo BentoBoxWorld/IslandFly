@@ -7,9 +7,10 @@ islandfly:
   enable-fly: "&a 플라이 모드가 활성화되었습니다."
   cancel-disable: "&a 당신은 돌아 왔습니다! 연료가 성공적으로 보충되었습니다!"
   wrong-world: "&c 당신은 올바른 게임 모드 세계에 있지 않습니다"
+  outside-protection-range: "&c 당신은 당신의 섬 보호 범위 밖에서 그것을 할 수 없습니다"
   command:
-    not-allowed-fly: "&c 이 섬을 비행 할 수 없습니다"
     description: 당신은 당신의 섬에 비행 할 수 있습니다
+    not-allowed-fly: "&c 이 섬을 비행 할 수 없습니다"
 protection:
   flags:
     ISLAND_FLY_PROTECTION:
