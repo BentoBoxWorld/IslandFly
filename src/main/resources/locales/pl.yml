@@ -9,9 +9,11 @@ islandfly:
   enable-fly: "&a Twój tryb latania został włączony."
   cancel-disable: "&a Wróciłeś? Paliwo zostało uzupełnione!"
   wrong-world: "&c Nie jesteś we właściwym świecie trybu gry"
+  outside-protection-range: "&c Nie możesz tego robić poza zasięgiem ochrony twojej
+    wyspy"
   command:
-    not-allowed-fly: "&c Nie wolno latać na tej wyspie"
     description: pozwala latać na swojej wyspie
+    not-allowed-fly: "&c Nie wolno latać na tej wyspie"
 protection:
   flags:
     ISLAND_FLY_PROTECTION:
