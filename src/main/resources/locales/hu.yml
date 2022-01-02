@@ -9,9 +9,10 @@ islandfly:
   enable-fly: "&a Az Ön repülési módja engedélyezve van."
   cancel-disable: "&a Visszatért, huh! Repülő üzemanyag feltöltése sikeresen!"
   wrong-world: "&c Nem vagy a megfelelő játékmód-világban"
+  outside-protection-range: "&c Ezt nem teheted a szigetvédelmi tartományon kívül"
   command:
-    not-allowed-fly: "&c Ezen a szigeten nem szabad repülni"
     description: lehetővé teszi repülését a szigeten
+    not-allowed-fly: "&c Ezen a szigeten nem szabad repülni"
 protection:
   flags:
     ISLAND_FLY_PROTECTION:
