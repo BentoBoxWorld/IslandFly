@@ -17,4 +17,6 @@ islandfly:
     only-on-island: "&cVous pouvez uniquement voler sur votre île."
 protection:
   flags:
-    ISLAND_FLY_PROTECTION: {}
+    ISLAND_FLY_PROTECTION:
+      description: "&a Toggle qui peut voler sur votre île"
+      name: "&a Interdiction du vol"
