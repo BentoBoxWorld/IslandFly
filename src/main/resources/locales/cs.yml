@@ -9,6 +9,7 @@ islandfly:
   enable-fly: "&aTvůj mód létání byl zapnut."
   cancel-disable: "&aJsi zpět, co? Palivo létání úspěšně doplněno!"
   wrong-world: "&cNejsi ve správném světě herního módu"
+  outside-protection-range: "&c Mimo rozsah ochrany ostrova to nesmíte dělat"
   command:
     description: povolí ti létat na tvém ostrově
     not-allowed-fly: "&c Na tomto ostrově nemáte povoleno létat"
