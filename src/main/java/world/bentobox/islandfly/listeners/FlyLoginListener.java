@@ -64,6 +64,6 @@ public class FlyLoginListener implements Listener {
 
     private boolean isInAir(Player player) {
         Block b = player.getLocation().getBlock();
-        return player.getLocation().getBlockY() > 1 && b.getRelative(BlockFace.DOWN).isEmpty() && b.getRelative(BlockFace.DOWN, 2).isEmpty();
+        return player.getLocation().getBlockY() > (player.getWorld().getMinHeight() + 1) && b.getRelative(BlockFace.DOWN).isEmpty() && b.getRelative(BlockFace.DOWN, 2).isEmpty();
     }
 }
