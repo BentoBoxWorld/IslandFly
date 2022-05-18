@@ -15,3 +15,6 @@ logout-disable-fly: false
 # disabled-gamemodes:
 #  - BSkyBlock
 disabled-gamemodes: []
+
+#This allows the player to use the command outside the island protection range.
+allow-command-outside-protection-range: false

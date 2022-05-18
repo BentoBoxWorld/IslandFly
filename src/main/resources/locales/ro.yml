@@ -9,9 +9,11 @@ islandfly:
   enable-fly: "&a Modul dvs. de zbor a fost activat."
   cancel-disable: "&a Te-ai întors, nu! Combustibilul zboară reumplut cu succes!"
   wrong-world: "&c Nu sunteți în lumea gamemode potrivită"
+  outside-protection-range: "&c Nu aveți voie să faceți asta în afara domeniului de
+    protecție a insulei"
   command:
-    not-allowed-fly: "&c Nu aveți voie să zburați pe această insulă"
     description: vă permite să zburați pe insula voastră
+    not-allowed-fly: "&c Nu aveți voie să zburați pe această insulă"
 protection:
   flags:
     ISLAND_FLY_PROTECTION:

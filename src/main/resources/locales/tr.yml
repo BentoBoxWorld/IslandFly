@@ -9,9 +9,10 @@ islandfly:
   enable-fly: "&a Uçuş modunuz etkinleştirildi."
   cancel-disable: "&a Geri döndün, ha! Sinek yakıtı başarıyla dolduruldu!"
   wrong-world: "&c Doğru oyun modu dünyasında değilsiniz"
+  outside-protection-range: "&c Bunu ada koruma alanınız dışında yapmanıza izin verilmiyor"
   command:
-    not-allowed-fly: "&c Bu adada uçmanıza izin verilmiyor"
     description: adanda uçmana izin verir
+    not-allowed-fly: "&c Bu adada uçmanıza izin verilmiyor"
 protection:
   flags:
     ISLAND_FLY_PROTECTION:

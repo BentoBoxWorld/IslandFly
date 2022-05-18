@@ -6,6 +6,7 @@ islandfly:
   enable-fly: "&a Your fly mode has been enabled."
   cancel-disable: "&a You are back, huh! Fly fuel successfully refilled!"
   wrong-world: "&c You are not in the right gamemode world"
+  outside-protection-range: "&c You are not allowed to do that outside your island protection range"
   command:
     description: "allows you to fly on your island"
     not-allowed-fly: "&c You are not allowed to fly on this island"
