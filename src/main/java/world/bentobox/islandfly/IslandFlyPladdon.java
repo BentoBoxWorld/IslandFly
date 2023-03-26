@@ -7,7 +7,6 @@
 package world.bentobox.islandfly;
 
 
-import org.bukkit.plugin.java.annotation.dependency.Dependency;
 import org.bukkit.plugin.java.annotation.plugin.ApiVersion;
 import org.bukkit.plugin.java.annotation.plugin.Plugin;
 
