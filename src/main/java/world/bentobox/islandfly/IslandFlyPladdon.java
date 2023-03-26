@@ -18,9 +18,8 @@ import world.bentobox.bentobox.api.addons.Pladdon;
 /**
  * @author BONNe
  */
-@Plugin(name="Pladdon", version="1.0")
+@Plugin(name="IslandFly", version="1.0")
 @ApiVersion(ApiVersion.Target.v1_17)
-@Dependency(value = "BentoBox")
 public class IslandFlyPladdon extends Pladdon
 {
     @Override
