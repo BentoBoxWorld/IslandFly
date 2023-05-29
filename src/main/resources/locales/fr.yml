@@ -2,6 +2,8 @@
 islandfly:
   fly-outside-alert: "&cVous êtes hors de votre île, vous ne pourrez plus voler dans
     &e[number]&c secondes."
+  fly-turning-off-alert: "&c Vous n'êtes plus autorisé à voler ici. Désactivation
+    du vol dans &e [number] &c secondes."
   disable-fly: "&cVous ne pouvez plus voler."
   enable-fly: "&aVous pouvez désormais voler."
   cancel-disable: "&aVous êtes de retour sur votre île ! Vous pouvez continuer à voler."
@@ -10,6 +12,7 @@ islandfly:
     de ton île"
   command:
     description: vous permet de voler sur votre île
+    not-allowed-fly: "&c Vous n'êtes pas autorisé à voler sur cette île"
     only-on-island: "&cVous pouvez uniquement voler sur votre île."
 protection:
   flags:
