@@ -1,21 +1,21 @@
 ---
 islandfly:
-  fly-outside-alert: "&c Anda di luar pulau Anda sehingga mode terbang akan dinonaktifkan
-    di &e [number] &c detik."
-  fly-turning-off-alert: "&c Anda tidak lagi diizinkan terbang ke sini. Mematikan
+  fly-outside-alert: "&c Kamu berada di luar pulaumu sehingga mode terbang akan dinonaktifkan
+    dalam &e [number] &c detik."
+  fly-turning-off-alert: "&c Kamu tidak diizinkan terbang di sini lagi. Mematikan
     terbang dalam &e [number] &c detik."
-  disable-fly: "&c Mode terbang Anda telah dinonaktifkan."
-  reallowed-fly: "&a Lalat Anda telah diluncurkan kembali"
-  enable-fly: "&a Mode terbang Anda telah diaktifkan."
-  cancel-disable: "&a Anda kembali, ya! Bahan bakar terbang berhasil diisi ulang!"
-  wrong-world: "&c Anda tidak berada di dunia gamemode yang tepat"
-  outside-protection-range: "&c Anda tidak diperbolehkan melakukan itu di luar jangkauan
-    perlindungan pulau Anda"
+  disable-fly: "&c Mode terbang kamu telah dinonaktifkan."
+  reallowed-fly: "&a Mode terbang kamu telah diizinkan kembali"
+  enable-fly: "&a Mode terbang kamu telah diaktifkan."
+  cancel-disable: "&a Kamu kembali, ya! Bahan bakar terbang berhasil diisi ulang!"
+  wrong-world: "&c Kamu tidak berada di dunia mode permainan yang benar"
+  outside-protection-range: "&c Kamu tidak boleh melakukan itu di luar jangkauan perlindungan
+    pulaumu"
   command:
-    description: memungkinkan Anda untuk terbang di pulau Anda
-    not-allowed-fly: "&c Anda tidak diizinkan terbang di pulau ini"
+    description: mengizinkan kamu untuk terbang di pulaumu
+    not-allowed-fly: "&c Kamu tidak boleh terbang di pulau ini"
 protection:
   flags:
     ISLAND_FLY_PROTECTION:
-      description: "&a Toggle yang bisa terbang di pulau Anda"
-      name: "&a Pencegahan lalat"
+      description: "&a Mengatur siapa yang bisa terbang di pulaumu"
+      name: "&a Pencegahan terbang"
