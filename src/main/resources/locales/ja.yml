@@ -3,13 +3,17 @@ islandfly:
   fly-outside-alert: "＆cあなたは島の外にいるので、＆e [number]＆c秒でフライモードは無効になります。"
   fly-turning-off-alert: "&cあなたはもうここに飛ぶことはできません。 &e [number]&c秒後にフライをオフにします。"
   disable-fly: "＆cフライモードは無効になっています。"
+  reallowed-fly: "＆aフライが再び許可されました"
   enable-fly: "＆aフライモードが有効になっています。"
   cancel-disable: "＆aあなたが戻ってきた、ハァッ！フライ燃料が正常に補充されました！"
   wrong-world: "＆cあなたは正しいゲームモードの世界にいません"
   outside-protection-range: "&c島の保護範囲外でそれを行うことは許可されていません"
   command:
     description: あなたの島で飛ぶことができます
+    not-allowed-fly: "＆cこの島への飛行は許可されていません"
     only-on-island: "＆cあなたの島でしか飛べません。"
 protection:
   flags:
-    ISLAND_FLY_PROTECTION: {}
+    ISLAND_FLY_PROTECTION:
+      description: "＆a島を飛べる人を切り替えます"
+      name: "＆飛ぶ防止"
