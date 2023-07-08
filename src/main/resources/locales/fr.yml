@@ -5,6 +5,7 @@ islandfly:
   fly-turning-off-alert: "&c Vous n'êtes plus autorisé à voler ici. Désactivation
     du vol dans &e [number] &c secondes."
   disable-fly: "&cVous ne pouvez plus voler."
+  reallowed-fly: "&a Vous pouvez de nouveau voler"
   enable-fly: "&aVous pouvez désormais voler."
   cancel-disable: "&aVous êtes de retour sur votre île ! Vous pouvez continuer à voler."
   wrong-world: "&cVous n'êtes pas dans le bon monde de mode de jeu."
@@ -16,4 +17,6 @@ islandfly:
     only-on-island: "&cVous pouvez uniquement voler sur votre île."
 protection:
   flags:
-    ISLAND_FLY_PROTECTION: {}
+    ISLAND_FLY_PROTECTION:
+      description: "&a Toggle qui peut voler sur votre île"
+      name: "&a Interdiction du vol"
