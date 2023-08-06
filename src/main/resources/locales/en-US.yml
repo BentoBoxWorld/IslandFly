@@ -2,6 +2,7 @@ islandfly:
   fly-outside-alert: "&c You are outside your island so fly mode will be disabled in &e[number] &c seconds."
   fly-turning-off-alert: "&c You are not permitted to fly here anymore. Turning fly off in &e[number] &c seconds."
   disable-fly: "&c Your fly mode has been disabled."
+  not-allowed: "&c Flying is not allowed here."
   reallowed-fly: "&a Your fly has been reallowed"
   enable-fly: "&a Your fly mode has been enabled."
   cancel-disable: "&a You are back, huh! Fly fuel successfully refilled!"

@@ -6,7 +6,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerToggleFlightEvent;
 
+import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
@@ -32,6 +34,33 @@ public class FlyListener implements Listener {
         this.addon = addon;
     }
 
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    public void onToggleFlight(final PlayerToggleFlightEvent event) {
+        final User user = User.getInstance(event.getPlayer());
+        if (checkUser(user)) {
+            user.sendMessage("islandfly.not-allowed");
+        }
+    }
+
+    /**
+     * @param user user
+     * @return true if fly was blocked
+     */
+    private boolean checkUser(User user) {
+        String permPrefix = addon.getPlugin().getIWM().getPermissionPrefix(user.getWorld());
+        // Ignore ops
+        if (user.isOp() || user.getPlayer().getGameMode().equals(GameMode.CREATIVE)
+                || user.getPlayer().getGameMode().equals(GameMode.SPECTATOR)
+                || user.hasPermission(permPrefix + "island.flybypass")) return false;
+        return removeFly(user);
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    public void onEnterIsland(final IslandEnterEvent event) {
+        final User user = User.getInstance(event.getPlayerUUID());
+        // Wait until after arriving at the island
+        Bukkit.getScheduler().runTask(this.addon.getPlugin(), () -> checkUser(user));
+    }
 
     /**
      * This method is triggered when player leaves their island.
