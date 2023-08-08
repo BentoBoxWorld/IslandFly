@@ -276,7 +276,6 @@ public class FlyListenerTest {
     @Test
     public void testRemoveFlyUserFlyingBackInProtectedAreaOfIsland() {
         assertFalse(fl.removeFly(user));
-        verify(user).sendMessage("islandfly.cancel-disable");
     }
 
     /**

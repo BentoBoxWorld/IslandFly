@@ -119,8 +119,6 @@ public class FlyListener implements Listener {
                 disableFly(user);
                 return true;
             }
-            if (user.getPlayer().isFlying())
-                user.sendMessage("islandfly.cancel-disable");
             return false;
         }
 
@@ -129,10 +127,6 @@ public class FlyListener implements Listener {
             disableFly(user);
             return true;
         }
-
-        // If false, will stay silent
-        if (user.getPlayer().isFlying())
-            user.sendMessage("islandfly.cancel-disable");
         return false;
     }
 
