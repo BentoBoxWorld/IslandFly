@@ -163,7 +163,7 @@ public class FlyToggleCommandTest {
     public void testCanExecuteWrongWorld() {
         when(Util.getWorld(any())).thenReturn(mock(World.class));
         assertFalse(ftc.canExecute(user, "fly", Collections.emptyList()));
-        verify(user).sendMessage(eq("islandfly.wrong-world"));
+        verify(user).sendMessage("islandfly.wrong-world");
 
     }
     /**
@@ -193,7 +193,7 @@ public class FlyToggleCommandTest {
         when(island.isAllowed(eq(user), any())).thenReturn(false);
         when(user.hasPermission(anyString())).thenReturn(false);
         assertFalse(ftc.canExecute(user, "fly", Collections.emptyList()));
-        verify(user).sendMessage(eq("islandfly.command.not-allowed-fly"));
+        verify(user).sendMessage("islandfly.command.not-allowed-fly");
     }
     /**
      * Test method for {@link world.bentobox.islandfly.FlyToggleCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
@@ -225,7 +225,7 @@ public class FlyToggleCommandTest {
         when(user.hasPermission(anyString())).thenReturn(false);
         when(box.contains(any(Vector.class))).thenReturn(false);
         assertFalse(ftc.canExecute(user, "fly", Collections.emptyList()));
-        verify(user).sendMessage(eq("islandfly.outside-protection-range"));
+        verify(user).sendMessage("islandfly.outside-protection-range");
     }
 
     /**

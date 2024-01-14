@@ -153,7 +153,7 @@ public class FlyListenerTest {
         when(event.getPlayerUUID()).thenReturn(uuid);
         fl.onExitIsland(event);
         verify(sch).runTaskLater(eq(plugin), any(Runnable.class), eq(100L));
-        verify(p).sendMessage(eq("islandfly.fly-outside-alert"));
+        verify(p).sendMessage("islandfly.fly-outside-alert");
     }
 
     /**
@@ -196,7 +196,7 @@ public class FlyListenerTest {
         when(event.getPlayerUUID()).thenReturn(uuid);
         fl.onExitIsland(event);
         verify(sch).runTaskLater(eq(plugin), any(Runnable.class), eq(100L));
-        verify(p, never()).sendMessage(eq("islandfly.fly-outside-alert"));
+        verify(p, never()).sendMessage("islandfly.fly-outside-alert");
     }
 
     /**
@@ -210,7 +210,7 @@ public class FlyListenerTest {
         when(event.getPlayerUUID()).thenReturn(uuid);
         fl.onExitIsland(event);
         verify(sch, never()).runTaskLater(eq(plugin), any(Runnable.class), any(Long.class));
-        verify(p).sendMessage(eq("islandfly.disable-fly"));
+        verify(p).sendMessage("islandfly.disable-fly");
     }
 
     /**
@@ -225,7 +225,7 @@ public class FlyListenerTest {
         when(event.getPlayerUUID()).thenReturn(uuid);
         fl.onExitIsland(event);
         verify(sch, never()).runTaskLater(eq(plugin), any(Runnable.class), any(Long.class));
-        verify(p, never()).sendMessage(eq("islandfly.disable-fly"));
+        verify(p, never()).sendMessage("islandfly.disable-fly");
     }
 
     /**
@@ -243,7 +243,7 @@ public class FlyListenerTest {
         when(p.getGameMode()).thenReturn(GameMode.SPECTATOR);
         fl.onExitIsland(event);
         verify(sch, never()).runTaskLater(eq(plugin), any(Runnable.class), any(Long.class));
-        verify(p, never()).sendMessage(eq("islandfly.disable-fly"));
+        verify(p, never()).sendMessage("islandfly.disable-fly");
     }
 
 
@@ -267,7 +267,7 @@ public class FlyListenerTest {
         assertTrue(fl.removeFly(user));
         verify(p).setFlying(false);
         verify(p).setAllowFlight(false);
-        verify(user).sendMessage(eq("islandfly.disable-fly"));
+        verify(user).sendMessage("islandfly.disable-fly");
     }
 
     /**
@@ -276,7 +276,6 @@ public class FlyListenerTest {
     @Test
     public void testRemoveFlyUserFlyingBackInProtectedAreaOfIsland() {
         assertFalse(fl.removeFly(user));
-        verify(user).sendMessage(eq("islandfly.cancel-disable"));
     }
 
     /**
@@ -288,7 +287,7 @@ public class FlyListenerTest {
         assertTrue(fl.removeFly(user));
         verify(p).setFlying(false);
         verify(p).setAllowFlight(false);
-        verify(user).sendMessage(eq("islandfly.disable-fly"));
+        verify(user).sendMessage("islandfly.disable-fly");
     }
 
     /**
@@ -310,7 +309,7 @@ public class FlyListenerTest {
         assertTrue(fl.removeFly(user));
         verify(p).setFlying(false);
         verify(p).setAllowFlight(false);
-        verify(user).sendMessage(eq("islandfly.disable-fly"));
+        verify(user).sendMessage("islandfly.disable-fly");
     }
 
 
@@ -333,7 +332,7 @@ public class FlyListenerTest {
         assertTrue(fl.removeFly(user));
         verify(p).setFlying(false);
         verify(p).setAllowFlight(false);
-        verify(user).sendMessage(eq("islandfly.disable-fly"));
+        verify(user).sendMessage("islandfly.disable-fly");
     }
 
 }

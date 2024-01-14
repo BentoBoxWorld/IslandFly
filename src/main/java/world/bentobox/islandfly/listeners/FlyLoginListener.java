@@ -37,27 +37,26 @@ public class FlyLoginListener implements Listener {
      * @param event Instance of PlayerQuitEvent
      */
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-    public void onLogin(final PlayerJoinEvent event) {        
+    public void onLogin(final PlayerJoinEvent event) {
         final Player player = event.getPlayer();
         final User user = User.getInstance(player);
         final String permPrefix = addon.getPlugin().getIWM().getPermissionPrefix(player.getWorld());
         if (player.hasPermission(permPrefix + "island.fly")
-                && !this.addon.getSettings().isFlyDisableOnLogout() && isInAir(player)
-                && addon.getIslands().userIsOnIsland(user.getWorld(), user))
-        {
-            if (!addon.getIslands().getIslandAt(user.getLocation()).map(i -> {
-                if (i.isAllowed(user, IslandFlyAddon.ISLAND_FLY_PROTECTION)) {
-                    // Enable fly
-                    player.setFallDistance(0);
-                    player.setAllowFlight(true);
-                    player.setFlying(true);
-                    user.sendMessage("islandfly.enable-fly");
-                    return true;
-                }
-                return false;
-            }).orElse(false)) {
-                user.sendMessage("islandfly.command.not-allowed-fly");
-            }
+                && !this.addon.getSettings().isFlyDisableOnLogout()
+                && isInAir(player)
+                && addon.getIslands().userIsOnIsland(user.getWorld(), user)
+                && !addon.getIslands().getIslandAt(user.getLocation()).map(i -> {
+                    if (i.isAllowed(user, IslandFlyAddon.ISLAND_FLY_PROTECTION)) {
+                        // Enable fly
+                        player.setFallDistance(0);
+                        player.setAllowFlight(true);
+                        player.setFlying(true);
+                        user.sendMessage("islandfly.enable-fly");
+                        return true;
+                    }
+                    return false;
+                }).orElse(false)) {
+            user.sendMessage("islandfly.command.not-allowed-fly");
         }
     }
 

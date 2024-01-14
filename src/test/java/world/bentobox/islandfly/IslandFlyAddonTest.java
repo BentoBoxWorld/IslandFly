@@ -64,7 +64,7 @@ public class IslandFlyAddonTest {
     private GameModeAddon gameMode;
     @Mock
     private FlagsManager fm;
-    
+
     @BeforeClass
     public static void beforeClass() throws Exception {
         // Clean up
@@ -100,7 +100,7 @@ public class IslandFlyAddonTest {
         when(plugin.getAddonsManager()).thenReturn(am);
         // One game mode
         when(am.getGameModeAddons()).thenReturn(Collections.singletonList(gameMode));
-        
+
         AddonDescription desc2 = new AddonDescription.Builder("bentobox", "BSkyBlock", "1.3").description("test").authors("tasty").build();
         when(gameMode.getDescription()).thenReturn(desc2);
         // Addon
@@ -117,11 +117,11 @@ public class IslandFlyAddonTest {
         Optional<CompositeCommand> opCmd = Optional.of(cmd);
         when(gameMode.getPlayerCommand()).thenReturn(opCmd);
         // Settings
-        
-        
+
+
     }
 
-    
+
     /**
      * @throws java.lang.Exception
      */
@@ -156,7 +156,7 @@ public class IslandFlyAddonTest {
         verify(am).registerListener(eq(ifa), any(FlyLogoutListener.class));
         verify(am).registerListener(eq(ifa), any(FlyFlagListener.class));
     }
-    
+
     /**
      * Test method for {@link world.bentobox.islandfly.IslandFlyAddon#onEnable()}.
      */
@@ -179,9 +179,9 @@ public class IslandFlyAddonTest {
     public void testOnReloadHooked() {
         testOnEnable();
         ifa.onReload();
-        verify(plugin).log(eq("[island fly addon] IslandFly addon reloaded."));
+        verify(plugin).log("[island fly addon] IslandFly addon reloaded.");
     }
-    
+
     /**
      * Test method for {@link world.bentobox.islandfly.IslandFlyAddon#onReload()}.
      */
