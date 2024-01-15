@@ -4,7 +4,7 @@ main: world.bentobox.islandfly.IslandFlyAddon
 icon: FEATHER
 api-version: 1.15.4
 
-softdepend: AcidIsland, BSkyBlock, CaveBlock, SkyGrid, AOneBlock
+softdepend: AcidIsland, BSkyBlock, CaveBlock, SkyGrid, AOneBlock, Level
 
 
 authors: [DarkRails, tastybento]

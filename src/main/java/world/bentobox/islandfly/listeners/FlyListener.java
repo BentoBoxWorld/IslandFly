@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
-
 import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
@@ -23,15 +22,15 @@ public class FlyListener implements Listener {
     /**
      * Addon instance object.
      */
-    private final IslandFlyAddon addon;
+    private final IslandFlyAddon islandFlyAddon;
 
 
     /**
      * Default constructor.
-     * @param addon instance of IslandFlyAddon
+     * @param islandFlyAddon instance of IslandFlyAddon
      */
-    public FlyListener(final IslandFlyAddon addon) {
-        this.addon = addon;
+    public FlyListener(final IslandFlyAddon islandFlyAddon) {
+        this.islandFlyAddon = islandFlyAddon;
     }
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -47,7 +46,7 @@ public class FlyListener implements Listener {
      * @return true if fly was blocked
      */
     private boolean checkUser(User user) {
-        String permPrefix = addon.getPlugin().getIWM().getPermissionPrefix(user.getWorld());
+        String permPrefix = islandFlyAddon.getPlugin().getIWM().getPermissionPrefix(user.getWorld());
         // Ignore ops
         if (user.isOp() || user.getPlayer().getGameMode().equals(GameMode.CREATIVE)
                 || user.getPlayer().getGameMode().equals(GameMode.SPECTATOR)
@@ -59,7 +58,7 @@ public class FlyListener implements Listener {
     public void onEnterIsland(final IslandEnterEvent event) {
         final User user = User.getInstance(event.getPlayerUUID());
         // Wait until after arriving at the island
-        Bukkit.getScheduler().runTask(this.addon.getPlugin(), () -> checkUser(user));
+        Bukkit.getScheduler().runTask(this.islandFlyAddon.getPlugin(), () -> checkUser(user));
     }
 
     /**
@@ -70,7 +69,7 @@ public class FlyListener implements Listener {
     public void onExitIsland(final IslandExitEvent event) {
 
         final User user = User.getInstance(event.getPlayerUUID());
-        String permPrefix = addon.getPlugin().getIWM().getPermissionPrefix(user.getWorld());
+        String permPrefix = islandFlyAddon.getPlugin().getIWM().getPermissionPrefix(user.getWorld());
         // Ignore ops
         if (user.isOp() || user.getPlayer().getGameMode().equals(GameMode.CREATIVE)
                 || user.getPlayer().getGameMode().equals(GameMode.SPECTATOR)
@@ -78,7 +77,7 @@ public class FlyListener implements Listener {
                 || (!user.hasPermission(permPrefix + "island.fly")
                         && !user.hasPermission(permPrefix + "island.flyspawn"))) return;
         // Alert player fly will be disabled
-        final int flyTimeout = this.addon.getSettings().getFlyTimeout();
+        final int flyTimeout = this.islandFlyAddon.getSettings().getFlyTimeout();
 
         // If timeout is 0 or less disable fly immediately
         if (flyTimeout <= 0) {
@@ -91,7 +90,7 @@ public class FlyListener implements Listener {
             user.sendMessage("islandfly.fly-outside-alert", TextVariables.NUMBER, String.valueOf(flyTimeout));
         }
 
-        Bukkit.getScheduler().runTaskLater(this.addon.getPlugin(), () -> removeFly(user), 20L* flyTimeout);
+        Bukkit.getScheduler().runTaskLater(this.islandFlyAddon.getPlugin(), () -> removeFly(user), 20L* flyTimeout);
     }
 
 
@@ -104,16 +103,16 @@ public class FlyListener implements Listener {
         // Verify player is still online
         if (!user.isOnline()) return false;
 
-        Island is = addon.getIslands().getProtectedIslandAt(user.getLocation()).orElse(null);
+        Island island = islandFlyAddon.getIslands().getProtectedIslandAt(user.getLocation()).orElse(null);
 
-        if (is == null) {
+        if (island == null) {
             disableFly(user);
             return true;
         }
 
         // Check if player is back on a spawn island
-        if (is.isSpawn()) {
-            if (this.addon.getPlugin().getIWM().getAddon(user.getWorld())
+        if (island.isSpawn()) {
+            if (this.islandFlyAddon.getPlugin().getIWM().getAddon(user.getWorld())
                     .map(a -> !user.hasPermission(a.getPermissionPrefix() + "island.flyspawn")).orElse(false)) {
 
                 disableFly(user);
@@ -122,8 +121,15 @@ public class FlyListener implements Listener {
             return false;
         }
 
+        if(islandFlyAddon.getSettings().getFlyMinLevel() > 1 && islandFlyAddon.getLevelAddon() != null) {
+            if (islandFlyAddon.getLevelAddon().getIslandLevel(island.getWorld(), island.getOwner()) < islandFlyAddon.getSettings().getFlyMinLevel()) {
+                disableFly(user);
+                return false;
+            }
+        }
+
         // Check if player is allowed to fly on the island he is at that moment
-        if (!is.isAllowed(user, IslandFlyAddon.ISLAND_FLY_PROTECTION)) {
+        if (!island.isAllowed(user, IslandFlyAddon.ISLAND_FLY_PROTECTION)) {
             disableFly(user);
             return true;
         }

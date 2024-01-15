@@ -7,13 +7,13 @@
 package world.bentobox.islandfly.config;
 
 
-import java.util.HashSet;
-import java.util.Set;
-
 import world.bentobox.bentobox.api.configuration.ConfigComment;
 import world.bentobox.bentobox.api.configuration.ConfigEntry;
 import world.bentobox.bentobox.api.configuration.ConfigObject;
 import world.bentobox.bentobox.api.configuration.StoreAt;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -45,6 +45,13 @@ public class Settings implements ConfigObject
         return flyTimeout;
     }
 
+    public long getFlyMinLevel() {
+        return flyMinLevel;
+    }
+
+    public void setFlyMinLevel(long flyMinLevel) {
+        this.flyMinLevel = flyMinLevel;
+    }
 
     /**
      * Method Settings#setFlyTimeout sets new value for the flyTimeout of this object.
@@ -77,6 +84,7 @@ public class Settings implements ConfigObject
     {
         this.flyDisableOnLogout = flyDisableOnLogout;
     }
+
 
 
     /**
@@ -141,6 +149,11 @@ public class Settings implements ConfigObject
     @ConfigComment("This allows to change if players should lose their fly mode if they quit server.")
     @ConfigEntry(path = "logout-disable-fly")
     private boolean flyDisableOnLogout = false;
+
+    @ConfigComment("")
+    @ConfigComment("Minimum required level to toggle fly.")
+    @ConfigEntry(path = "fly-min-level")
+    private long flyMinLevel = 0;
 
     @ConfigComment("")
     @ConfigComment("This list stores GameModes in which islandFly addon should not work.")

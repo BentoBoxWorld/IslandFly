@@ -9,6 +9,9 @@ fly-timeout: 5
 # 
 # This allows to change if players should lose their fly mode if they quit server.
 logout-disable-fly: false
+#
+# Minimum required level to toggle fly.
+fly-min-level: 0
 # 
 # This list stores GameModes in which islandFly addon should not work.
 # To disable addon it is necessary to write its name in new line that starts with -. Example:
