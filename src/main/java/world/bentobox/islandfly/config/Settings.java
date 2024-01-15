@@ -123,8 +123,8 @@ public class Settings implements ConfigObject
 
 
     /**
-     * Method Settings#setFlyDisableOnLogout sets new value for the flyDisableOnLogout of this object.
-     * @param flyDisableOnLogout new value for this object.
+     * Method Settings#setAllowCommandOutsideProtectionRange sets new value for the commandAllowed of this object.
+     * @param commandAllowed new value for this object.
      *
      */
     public void setAllowCommandOutsideProtectionRange(boolean commandAllowed)

@@ -17,8 +17,8 @@ import java.util.List;
 public class FlyToggleCommand extends CompositeCommand {
 
 
-    private Settings settings;
-    private IslandFlyAddon islandFlyAddon;
+    private final Settings settings;
+    private final IslandFlyAddon islandFlyAddon;
 
     /**
      * Default constructor
