@@ -1,14 +1,14 @@
 package world.bentobox.islandfly;
 
-import java.util.List;
-
 import org.bukkit.entity.Player;
-
 import world.bentobox.bentobox.api.commands.CompositeCommand;
+import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.bentobox.util.Util;
 import world.bentobox.islandfly.config.Settings;
+
+import java.util.List;
 
 
 /**
@@ -17,7 +17,8 @@ import world.bentobox.islandfly.config.Settings;
 public class FlyToggleCommand extends CompositeCommand {
 
 
-    private Settings settings;
+    private final Settings settings;
+    private final IslandFlyAddon islandFlyAddon;
 
     /**
      * Default constructor
@@ -26,6 +27,7 @@ public class FlyToggleCommand extends CompositeCommand {
     public FlyToggleCommand(CompositeCommand parent, IslandFlyAddon addon) {
         super(parent, "fly");
         this.settings = addon.getSettings();
+        this.islandFlyAddon = addon;
     }
 
 
@@ -71,6 +73,12 @@ public class FlyToggleCommand extends CompositeCommand {
 
         }
 
+        if(islandFlyAddon.getSettings().getFlyMinLevel() > 1 && islandFlyAddon.getLevelAddon() != null) {
+            if (islandFlyAddon.getLevelAddon().getIslandLevel(island.getWorld(), island.getOwner()) < islandFlyAddon.getSettings().getFlyMinLevel()) {
+                user.sendMessage("islandfly.fly-min-level-alert", TextVariables.NUMBER, String.valueOf(islandFlyAddon.getSettings().getFlyMinLevel()));
+                return false;
+            }
+        }
 
         return true;
     }

@@ -1,17 +1,13 @@
 package world.bentobox.islandfly;
 
 import org.bukkit.Material;
-
 import world.bentobox.bentobox.api.addons.Addon;
 import world.bentobox.bentobox.api.configuration.Config;
 import world.bentobox.bentobox.api.flags.Flag;
 import world.bentobox.bentobox.managers.RanksManager;
 import world.bentobox.islandfly.config.Settings;
-import world.bentobox.islandfly.listeners.FlyDeathListener;
-import world.bentobox.islandfly.listeners.FlyFlagListener;
-import world.bentobox.islandfly.listeners.FlyListener;
-import world.bentobox.islandfly.listeners.FlyLoginListener;
-import world.bentobox.islandfly.listeners.FlyLogoutListener;
+import world.bentobox.islandfly.listeners.*;
+import world.bentobox.level.Level;
 
 
 /**
@@ -22,6 +18,11 @@ public class IslandFlyAddon extends Addon {
      * Settings object for IslandFlyAddon
      */
     private Settings settings;
+
+    /**
+     * Level addon instance.
+     */
+    private Level levelAddon;
 
     /**
      * A flag to allow or disallow flight on island
@@ -115,6 +116,21 @@ public class IslandFlyAddon extends Addon {
         //Nothing to do here
     }
 
+    /**
+     * Check addon hooks.
+     */
+    public void allLoaded()
+    {
+        // Try to find Level addon and if it does not exist, display a warning
+        this.getAddonByName("Level").ifPresentOrElse(addon ->
+        {
+            this.levelAddon = (Level) addon;
+            this.log("Level Addon hooked into Level addon.");
+        }, () ->
+        {
+            this.levelAddon = null;
+        });
+    }
 
     /**
      * This method loads addon configuration settings in memory.
@@ -135,5 +151,16 @@ public class IslandFlyAddon extends Addon {
      */
     public Settings getSettings() {
         return settings;
+    }
+
+
+    /**
+     * Gets level addon.
+     *
+     * @return the level addon
+     */
+    public Level getLevelAddon()
+    {
+        return levelAddon;
     }
 }
