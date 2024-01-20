@@ -54,7 +54,7 @@
         <!-- Revision variable removes warning about dynamic version -->
         <revision>${build.version}-SNAPSHOT</revision>
         <!-- This allows to change between versions and snapshots. -->
-        <build.version>1.11.1</build.version>
+        <build.version>1.12.0</build.version>
         <build.number>-LOCAL</build.number>
         <sonar.projectKey>BentoBoxWorld_Boxed</sonar.projectKey>
         <sonar.organization>bentobox-world</sonar.organization>
