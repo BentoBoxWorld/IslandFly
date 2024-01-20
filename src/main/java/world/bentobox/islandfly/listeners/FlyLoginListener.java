@@ -53,7 +53,6 @@ public class FlyLoginListener implements Listener {
                             return false;
                         }
                     }
-
                     if (i.isAllowed(user, IslandFlyAddon.ISLAND_FLY_PROTECTION)) {
                         // Enable fly
                         player.setFallDistance(0);
