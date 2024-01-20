@@ -49,10 +49,12 @@
         <!-- More visible way how to change dependency versions -->
         <spigot.version>1.20.4-R0.1-SNAPSHOT</spigot.version>
         <bentobox.version>2.0.0-SNAPSHOT</bentobox.version>
+        <!-- Level addon version -->
+        <level.version>2.9.0</level.version>
         <!-- Revision variable removes warning about dynamic version -->
         <revision>${build.version}-SNAPSHOT</revision>
         <!-- This allows to change between versions and snapshots. -->
-        <build.version>1.11.1</build.version>
+        <build.version>1.12.0</build.version>
         <build.number>-LOCAL</build.number>
         <sonar.projectKey>BentoBoxWorld_Boxed</sonar.projectKey>
         <sonar.organization>bentobox-world</sonar.organization>
@@ -121,6 +123,12 @@
             <groupId>world.bentobox</groupId>
             <artifactId>bentobox</artifactId>
             <version>${bentobox.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>world.bentobox</groupId>
+            <artifactId>level</artifactId>
+            <version>${level.version}</version>
             <scope>provided</scope>
         </dependency>
         <!-- Mockito (Unit testing) -->
@@ -281,6 +289,8 @@
                         <!-- This is required to prevent Jacoco from adding 
                             synthetic fields to a JavaBean class (causes errors in testing) -->
                         <exclude>**/*Names*</exclude>
+                        <!-- Prevents the Material is too large to mock error -->
+                        <exclude>org/bukkit/Material*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

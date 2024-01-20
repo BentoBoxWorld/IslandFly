@@ -1,5 +1,6 @@
 islandfly:
   fly-outside-alert: "&c You are outside your island so fly mode will be disabled in &e[number] &c seconds."
+  fly-min-level-alert: "&c You can only enable fly once your Island level reaches &e[number]&c!"
   fly-turning-off-alert: "&c You are not permitted to fly here anymore. Turning fly off in &e[number] &c seconds."
   disable-fly: "&c Your fly mode has been disabled."
   not-allowed: "&c Flying is not allowed here."

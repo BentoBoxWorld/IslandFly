@@ -144,7 +144,7 @@ public class FlyListenerTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandEvent.IslandExitEvent)}.
+     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandExitEvent)}.
      */
     @Test
     public void testOnExitIslandGraceTime() {
@@ -157,7 +157,7 @@ public class FlyListenerTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandEvent.IslandExitEvent)}.
+     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandExitEvent)}.
      */
     @Test
     public void testOnExitIslandGraceTimeOp() {
@@ -171,7 +171,7 @@ public class FlyListenerTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandEvent.IslandExitEvent)}.
+     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandExitEvent)}.
      */
     @Test
     public void testOnExitIslandGraceTimePermission() {
@@ -185,7 +185,7 @@ public class FlyListenerTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandEvent.IslandExitEvent)}.
+     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandExitEvent)}.
      */
     @Test
     public void testOnExitIslandGraceTimeNotFlying() {
@@ -200,7 +200,7 @@ public class FlyListenerTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandEvent.IslandExitEvent)}.
+     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandExitEvent)}.
      */
     @Test
     public void testOnExitIslandNoGraceTime() {
@@ -214,7 +214,7 @@ public class FlyListenerTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandEvent.IslandExitEvent)}.
+     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandExitEvent)}.
      */
     @Test
     public void testOnExitIslandNoGraceTimeNoPermission() {
@@ -229,7 +229,7 @@ public class FlyListenerTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandEvent.IslandExitEvent)}.
+     * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandExitEvent)}.
      */
     @Test
     public void testOnExitIslandNoGraceTimeCreativeOrSpectator() {

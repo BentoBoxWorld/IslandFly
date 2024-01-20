@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-
+import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.islandfly.IslandFlyAddon;
 
@@ -19,16 +19,16 @@ public class FlyLoginListener implements Listener {
     /**
      * IslandFlyAddon instance.
      */
-    private final IslandFlyAddon addon;
+    private final IslandFlyAddon islandFlyAddon;
 
 
     /**
      * Default constructor.
-     * @param addon instance of IslandFlyAddon
+     * @param islandFlyAddon instance of IslandFlyAddon
      */
-    public FlyLoginListener(IslandFlyAddon addon)
+    public FlyLoginListener(IslandFlyAddon islandFlyAddon)
     {
-        this.addon = addon;
+        this.islandFlyAddon = islandFlyAddon;
     }
 
 
@@ -40,12 +40,19 @@ public class FlyLoginListener implements Listener {
     public void onLogin(final PlayerJoinEvent event) {
         final Player player = event.getPlayer();
         final User user = User.getInstance(player);
-        final String permPrefix = addon.getPlugin().getIWM().getPermissionPrefix(player.getWorld());
+        final String permPrefix = islandFlyAddon.getPlugin().getIWM().getPermissionPrefix(player.getWorld());
         if (player.hasPermission(permPrefix + "island.fly")
-                && !this.addon.getSettings().isFlyDisableOnLogout()
+                && !this.islandFlyAddon.getSettings().isFlyDisableOnLogout()
                 && isInAir(player)
-                && addon.getIslands().userIsOnIsland(user.getWorld(), user)
-                && !addon.getIslands().getIslandAt(user.getLocation()).map(i -> {
+                && islandFlyAddon.getIslands().userIsOnIsland(user.getWorld(), user)
+                && !islandFlyAddon.getIslands().getIslandAt(user.getLocation()).map(i -> {
+
+                    if(islandFlyAddon.getSettings().getFlyMinLevel() > 1 && islandFlyAddon.getLevelAddon() != null) {
+                        if (islandFlyAddon.getLevelAddon().getIslandLevel(i.getWorld(), i.getOwner()) < islandFlyAddon.getSettings().getFlyMinLevel()) {
+                            user.sendMessage("islandfly.fly-min-level-alert", TextVariables.NUMBER, String.valueOf(islandFlyAddon.getSettings().getFlyMinLevel()));
+                            return false;
+                        }
+                    }
                     if (i.isAllowed(user, IslandFlyAddon.ISLAND_FLY_PROTECTION)) {
                         // Enable fly
                         player.setFallDistance(0);
