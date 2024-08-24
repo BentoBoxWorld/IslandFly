@@ -13,9 +13,13 @@ import world.bentobox.bentobox.api.addons.Pladdon;
 
 public class IslandFlyPladdon extends Pladdon
 {
+    Addon addon;
     @Override
     public Addon getAddon()
     {
-        return new IslandFlyAddon();
+        if (addon == null) {
+            addon = new IslandFlyAddon();
+        }
+        return addon;
     }
 }
