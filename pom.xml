@@ -47,14 +47,14 @@
         <java.version>17</java.version>
         <powermock.version>2.0.9</powermock.version>
         <!-- More visible way how to change dependency versions -->
-        <spigot.version>1.20.4-R0.1-SNAPSHOT</spigot.version>
-        <bentobox.version>2.0.0-SNAPSHOT</bentobox.version>
+        <spigot.version>1.21.1-R0.1-SNAPSHOT</spigot.version>
+        <bentobox.version>2.5.0-SNAPSHOT</bentobox.version>
         <!-- Level addon version -->
         <level.version>2.9.0</level.version>
         <!-- Revision variable removes warning about dynamic version -->
         <revision>${build.version}-SNAPSHOT</revision>
         <!-- This allows to change between versions and snapshots. -->
-        <build.version>1.12.0</build.version>
+        <build.version>1.13.0</build.version>
         <build.number>-LOCAL</build.number>
         <sonar.projectKey>BentoBoxWorld_Boxed</sonar.projectKey>
         <sonar.organization>bentobox-world</sonar.organization>
