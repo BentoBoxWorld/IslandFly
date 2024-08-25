@@ -17,7 +17,7 @@ permissions:
     default: op
   '[gamemode].island.fly':
     description: Allows access to fly command.
-    default: true
+    default: false
   '[gamemode].island.flybypass':
     description: Allows to keep fly mode on player death.
     default: op
