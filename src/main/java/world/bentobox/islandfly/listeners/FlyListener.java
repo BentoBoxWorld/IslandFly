@@ -1,5 +1,6 @@
 package world.bentobox.islandfly.listeners;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
@@ -46,8 +47,11 @@ public class FlyListener implements Listener {
             user.sendMessage("islandfly.not-allowed");
         } else {
             addon.getIslands().getIslandAt(user.getLocation())
-                    .filter(i -> i.getMemberSet().contains(user.getUniqueId())).ifPresent(is -> user
-                            .setMetaData(Map.of("IslandFly-" + is.getUniqueId(), new MetaDataValue(event.isFlying())))); // Record the fly state for this island
+                    .filter(i -> i.getMemberSet().contains(user.getUniqueId())).ifPresent(is -> {
+                        Map<String, MetaDataValue> metaData = new HashMap<>();
+                        metaData.put("IslandFly-" + is.getUniqueId(), new MetaDataValue(event.isFlying()));
+                        user.setMetaData(metaData); // Record the fly state for this island
+                    });
 
         }
     }
