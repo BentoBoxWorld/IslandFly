@@ -29,7 +29,7 @@ public class FlyListener implements Listener {
     /**
      * Addon instance object.
      */
-    private final IslandFlyAddon addon;
+    private final IslandFlyAddon islandFlyAddon;
 
 
     /**
@@ -61,7 +61,7 @@ public class FlyListener implements Listener {
      * @return true if fly was blocked
      */
     private boolean checkUser(User user) {
-        String permPrefix = addon.getPlugin().getIWM().getPermissionPrefix(user.getWorld());
+        String permPrefix = islandFlyAddon.getPlugin().getIWM().getPermissionPrefix(user.getWorld());
         // Ignore ops
         if (user.isOp() || user.getPlayer().getGameMode().equals(GameMode.CREATIVE)
                 || user.getPlayer().getGameMode().equals(GameMode.SPECTATOR)
@@ -78,7 +78,7 @@ public class FlyListener implements Listener {
                     user.getPlayer().setFlying(mdv.asBoolean());
                 });
         // Wait until after arriving at the island
-        Bukkit.getScheduler().runTask(this.addon.getPlugin(), () -> checkUser(user));
+        Bukkit.getScheduler().runTask(this.islandFlyAddon.getPlugin(), () -> checkUser(user));
     }
 
     /**
@@ -88,7 +88,7 @@ public class FlyListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onExitIsland(final IslandExitEvent event) {
         final User user = User.getInstance(event.getPlayerUUID());
-        String permPrefix = addon.getPlugin().getIWM().getPermissionPrefix(user.getWorld());
+        String permPrefix = islandFlyAddon.getPlugin().getIWM().getPermissionPrefix(user.getWorld());
         // Ignore ops
         if (user.isOp() || user.getPlayer().getGameMode().equals(GameMode.CREATIVE)
                 || user.getPlayer().getGameMode().equals(GameMode.SPECTATOR)
@@ -96,7 +96,7 @@ public class FlyListener implements Listener {
                 || (!user.hasPermission(permPrefix + "island.fly")
                         && !user.hasPermission(permPrefix + "island.flyspawn"))) return;
         // Alert player fly will be disabled
-        final int flyTimeout = this.addon.getSettings().getFlyTimeout();
+        final int flyTimeout = this.islandFlyAddon.getSettings().getFlyTimeout();
 
         // If timeout is 0 or less disable fly immediately
         if (flyTimeout <= 0) {

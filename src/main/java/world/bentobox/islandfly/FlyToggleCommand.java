@@ -1,15 +1,14 @@
 package world.bentobox.islandfly;
 
-import java.util.List;
-
 import org.bukkit.entity.Player;
-
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.bentobox.util.Util;
 import world.bentobox.islandfly.config.Settings;
+
+import java.util.List;
 
 
 /**
