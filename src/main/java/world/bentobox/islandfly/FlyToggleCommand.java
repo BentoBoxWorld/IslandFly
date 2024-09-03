@@ -88,13 +88,11 @@ public class FlyToggleCommand extends CompositeCommand {
         final Player player = user.getPlayer();
 
         if (player.getAllowFlight()) {
-
             // Disable fly and notify player
             player.setFlying(false);
             player.setAllowFlight(false);
             user.sendMessage("islandfly.disable-fly");
         } else {
-
             // Enable fly and notify player
             player.setAllowFlight(true);
             user.sendMessage("islandfly.enable-fly");
