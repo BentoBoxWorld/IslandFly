@@ -1,15 +1,18 @@
 package world.bentobox.islandfly.listeners;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,17 +21,20 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Player.Spigot;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.eclipse.jdt.annotation.Nullable;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import net.md_5.bungee.api.chat.TextComponent;
 import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.api.addons.GameModeAddon;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
@@ -79,6 +85,8 @@ public class FlyListenerTest {
     private BukkitScheduler sch;
     @Mock
     private Settings settings;
+    @Mock
+    private Spigot spigot;
 
     /**
      */
@@ -102,6 +110,7 @@ public class FlyListenerTest {
         when(p.isOp()).thenReturn(false);
         when(p.isFlying()).thenReturn(true);
         when(p.getGameMode()).thenReturn(GameMode.SURVIVAL);
+        when(p.spigot()).thenReturn(spigot);
         User.setPlugin(plugin);
         User.getInstance(p);
         when(user.getUniqueId()).thenReturn(uuid);
@@ -117,6 +126,7 @@ public class FlyListenerTest {
         when(gameMode.getPermissionPrefix()).thenReturn("bskyblock.");
         when(iwm.getAddon(any())).thenReturn(opGm);
         when(iwm.getPermissionPrefix(any())).thenReturn("bskyblock.");
+        when(iwm.getFriendlyName(any())).thenReturn("BSkyBlock");
         // Bukkit
         PowerMockito.mockStatic(Bukkit.class);
         when(Bukkit.getScheduler()).thenReturn(sch);
@@ -153,8 +163,37 @@ public class FlyListenerTest {
         when(event.getPlayerUUID()).thenReturn(uuid);
         fl.onExitIsland(event);
         verify(sch).runTaskLater(eq(plugin), any(Runnable.class), eq(100L));
-        verify(p).sendMessage("islandfly.fly-outside-alert");
+        checkSpigotMessage("islandfly.fly-outside-alert");
     }
+
+    /**
+     * Check that spigot sent the message
+     * @param message - message to check
+     */
+    public void checkSpigotMessage(String expectedMessage) {
+        checkSpigotMessage(expectedMessage, 1);
+    }
+
+    public void checkSpigotMessage(String expectedMessage, int expectedOccurrences) {
+        // Capture the argument passed to spigot().sendMessage(...) if messages are sent
+        ArgumentCaptor<TextComponent> captor = ArgumentCaptor.forClass(TextComponent.class);
+
+        // Verify that sendMessage() was called at least 0 times (capture any sent messages)
+        verify(spigot, atLeast(0)).sendMessage(captor.capture());
+
+        // Get all captured TextComponents
+        List<TextComponent> capturedMessages = captor.getAllValues();
+
+        // Count the number of occurrences of the expectedMessage in the captured messages
+        long actualOccurrences = capturedMessages.stream().map(component -> component.toLegacyText()) // Convert each TextComponent to plain text
+                .filter(messageText -> messageText.contains(expectedMessage)) // Check if the message contains the expected text
+                .count(); // Count how many times the expected message appears
+
+        // Assert that the number of occurrences matches the expectedOccurrences
+        assertEquals("Expected message occurrence mismatch: " + expectedMessage, expectedOccurrences,
+                actualOccurrences);
+    }
+
 
     /**
      * Test method for {@link world.bentobox.islandfly.listeners.FlyListener#onExitIsland(world.bentobox.bentobox.api.events.island.IslandExitEvent)}.
@@ -210,7 +249,7 @@ public class FlyListenerTest {
         when(event.getPlayerUUID()).thenReturn(uuid);
         fl.onExitIsland(event);
         verify(sch, never()).runTaskLater(eq(plugin), any(Runnable.class), any(Long.class));
-        verify(p).sendMessage("islandfly.disable-fly");
+        checkSpigotMessage("islandfly.disable-fly");
     }
 
     /**
