@@ -1,8 +1,5 @@
 package world.bentobox.islandfly.listeners;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -12,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.eclipse.jdt.annotation.NonNull;
 
+import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
@@ -47,11 +45,11 @@ public class FlyListener implements Listener {
             user.sendMessage("islandfly.not-allowed");
         } else {
             addon.getIslands().getIslandAt(user.getLocation())
-                    .filter(i -> i.getMemberSet().contains(user.getUniqueId())).ifPresent(is -> {
-                        Map<String, MetaDataValue> metaData = new HashMap<>();
-                        metaData.put("IslandFly-" + is.getUniqueId(), new MetaDataValue(event.isFlying()));
-                        user.setMetaData(metaData); // Record the fly state for this island
-                    });
+                    .filter(i -> i.getMemberSet().contains(user.getUniqueId())).ifPresent(
+                            is -> {
+                                user.putMetaData(ISLANDFLY + is.getUniqueId(), new MetaDataValue(event.isFlying()));
+                                addon.getPlayers().savePlayer(user.getUniqueId());
+                            });
 
         }
     }
