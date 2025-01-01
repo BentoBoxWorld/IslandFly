@@ -40,14 +40,16 @@ public class FlyListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onToggleFlight(final PlayerToggleFlightEvent event) {
-        BentoBox.getInstance().logDebug(event.getEventName());
         final User user = User.getInstance(event.getPlayer());
         if (checkUser(user)) {
             user.sendMessage("islandfly.not-allowed");
         } else {
             addon.getIslands().getIslandAt(user.getLocation())
                     .filter(i -> i.getMemberSet().contains(user.getUniqueId())).ifPresent(
-                            is -> user.putMetaData(ISLANDFLY + is.getUniqueId(), new MetaDataValue(event.isFlying())));
+                            is -> {
+                                user.putMetaData(ISLANDFLY + is.getUniqueId(), new MetaDataValue(event.isFlying()));
+                                addon.getPlayers().savePlayer(user.getUniqueId());
+                            });
 
         }
     }
