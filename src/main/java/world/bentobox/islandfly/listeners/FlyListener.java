@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.eclipse.jdt.annotation.NonNull;
 
-import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
@@ -45,11 +44,10 @@ public class FlyListener implements Listener {
             user.sendMessage("islandfly.not-allowed");
         } else {
             addon.getIslands().getIslandAt(user.getLocation())
-                    .filter(i -> i.getMemberSet().contains(user.getUniqueId())).ifPresent(
-                            is -> {
-                                user.putMetaData(ISLANDFLY + is.getUniqueId(), new MetaDataValue(event.isFlying()));
-                                addon.getPlayers().savePlayer(user.getUniqueId());
-                            });
+                    .filter(i -> i.getMemberSet().contains(user.getUniqueId())).ifPresent(is -> {
+                        user.putMetaData(ISLANDFLY + is.getUniqueId(), new MetaDataValue(event.isFlying()));
+                        addon.getPlayers().savePlayer(user.getUniqueId());
+                    });
 
         }
     }
@@ -72,8 +70,10 @@ public class FlyListener implements Listener {
         final User user = User.getInstance(event.getPlayerUUID());
         user.getMetaData(ISLANDFLY + event.getIsland().getUniqueId())
                 .ifPresent(mdv -> {
-                    user.getPlayer().setAllowFlight(true);
-                    user.getPlayer().setFlying(mdv.asBoolean());
+                    if (mdv.asBoolean()) {
+                        user.getPlayer().setAllowFlight(true);
+                        user.getPlayer().setFlying(mdv.asBoolean());
+                    }
                 });
         // Wait until after arriving at the island
         Bukkit.getScheduler().runTask(this.addon.getPlugin(), () -> checkUser(user));
