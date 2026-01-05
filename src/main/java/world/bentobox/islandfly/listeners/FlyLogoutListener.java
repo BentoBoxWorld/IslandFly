@@ -1,5 +1,6 @@
 package world.bentobox.islandfly.listeners;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -36,6 +37,12 @@ public class FlyLogoutListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onLogout(final PlayerQuitEvent event) {
         final Player player = event.getPlayer();
+        String permPrefix = addon.getPlugin().getIWM().getPermissionPrefix(player.getWorld());
+        if (player.isOp() || player.getGameMode().equals(GameMode.CREATIVE)
+                || player.getGameMode().equals(GameMode.SPECTATOR)
+                || player.hasPermission(permPrefix + "island.flybypass")) {
+            return;
+        }
 
         if (player.getAllowFlight() && this.addon.getSettings().isFlyDisableOnLogout())
         {
