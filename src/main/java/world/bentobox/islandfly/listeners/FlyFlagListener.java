@@ -1,6 +1,7 @@
 package world.bentobox.islandfly.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,13 +31,20 @@ public class FlyFlagListener implements Listener {
         // the moment and warn them that their fly is about to turn off
         island.getPlayersOnIsland()
         .stream()
-        //.parallelStream()
         .filter(Player::isFlying)
-        .filter(p -> !p.isOp())
+        .filter(this::checkPlayer)
         .filter(p -> !(island.isAllowed(User.getInstance(p), IslandFlyAddon.ISLAND_FLY_PROTECTION)))
         .forEach(p -> startDisabling(p, island));
     }
-
+    
+    private boolean checkPlayer(Player p) {
+        final String permPrefix = addon.getPlugin().getIWM().getPermissionPrefix(p.getWorld());
+        return !(p.isOp() 
+                || p.getGameMode().equals(GameMode.CREATIVE)
+                || p.getGameMode().equals(GameMode.SPECTATOR)
+                || p.hasPermission(permPrefix + "island.flybypass"));
+    }
+ 
     private void startDisabling(Player p, Island island) {
 
         int flyTimeout = this.addon.getSettings().getFlyTimeout();

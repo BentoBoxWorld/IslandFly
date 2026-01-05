@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Player.Spigot;
@@ -37,6 +38,7 @@ import world.bentobox.bentobox.api.events.flags.FlagProtectionChangeEvent;
 import world.bentobox.bentobox.api.flags.Flag;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
+import world.bentobox.bentobox.managers.IslandWorldManager;
 import world.bentobox.bentobox.managers.LocalesManager;
 import world.bentobox.bentobox.managers.PlaceholdersManager;
 import world.bentobox.islandfly.IslandFlyAddon;
@@ -73,6 +75,8 @@ public class FlyFlagListenerTest {
     private Island island;
     @Mock
     private Spigot spigot;
+    @Mock
+    private IslandWorldManager iwm;
 
     /**
      * @throws java.lang.Exception
@@ -102,20 +106,24 @@ public class FlyFlagListenerTest {
         @NonNull
         List<Player> list = new ArrayList<>();
         when(p1.getUniqueId()).thenReturn(UUID.randomUUID());
+        when(p1.getGameMode()).thenReturn(GameMode.SURVIVAL);
         when(p1.spigot()).thenReturn(spigot);
         User.getInstance(p1);
         when(p1.isFlying()).thenReturn(true);
        when(p2.getUniqueId()).thenReturn(UUID.randomUUID());
+       when(p2.getGameMode()).thenReturn(GameMode.SURVIVAL);
        when(p2.spigot()).thenReturn(spigot);
         User.getInstance(p2);
         when(p2.isFlying()).thenReturn(true);
         when(p2.isOnline()).thenReturn(true);
         when(p2.getLocation()).thenReturn(mock(Location.class));
          when(p3.getUniqueId()).thenReturn(UUID.randomUUID());
+         when(p3.getGameMode()).thenReturn(GameMode.SURVIVAL);
          when(p3.spigot()).thenReturn(spigot);
         User.getInstance(p3);
         when(p3.isFlying()).thenReturn(false);
         when(op.getUniqueId()).thenReturn(UUID.randomUUID());
+        when(op.getGameMode()).thenReturn(GameMode.SURVIVAL);
         when(op.spigot()).thenReturn(spigot);
         User.getInstance(op);
         when(op.isFlying()).thenReturn(true);
@@ -128,6 +136,9 @@ public class FlyFlagListenerTest {
         // One player is allowed, others not
         when(island.isAllowed(any(), any())).thenReturn(true, false);
         when(island.onIsland(any())).thenReturn(true);
+        
+        // IWM
+        when(plugin.getIWM()).thenReturn(iwm);
         
         ffl = new FlyFlagListener(addon);
     }
