@@ -39,15 +39,20 @@ public class FlyListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onToggleFlight(final PlayerToggleFlightEvent event) {
+        // Check world
+        if (!addon.inWorld(event.getPlayer().getWorld())) {
+            // Ignore
+            return;
+        }
         final User user = User.getInstance(event.getPlayer());
         if (checkUser(user)) {
             user.sendMessage("islandfly.not-allowed");
         } else {
             addon.getIslands().getIslandAt(user.getLocation())
-                    .filter(i -> i.getMemberSet().contains(user.getUniqueId())).ifPresent(is -> {
-                        user.putMetaData(ISLANDFLY + is.getUniqueId(), new MetaDataValue(event.isFlying()));
-                        addon.getPlayers().savePlayer(user.getUniqueId());
-                    });
+            .filter(i -> i.getMemberSet().contains(user.getUniqueId())).ifPresent(is -> {
+                user.putMetaData(ISLANDFLY + is.getUniqueId(), new MetaDataValue(event.isFlying()));
+                addon.getPlayers().savePlayer(user.getUniqueId());
+            });
 
         }
     }
@@ -61,7 +66,9 @@ public class FlyListener implements Listener {
         // Ignore ops
         if (user.isOp() || user.getPlayer().getGameMode().equals(GameMode.CREATIVE)
                 || user.getPlayer().getGameMode().equals(GameMode.SPECTATOR)
-                || user.hasPermission(permPrefix + "island.flybypass")) return false;
+                || user.hasPermission(permPrefix + "island.flybypass")) {
+            return false;
+        }
         return removeFly(user);
     }
 
@@ -69,12 +76,12 @@ public class FlyListener implements Listener {
     public void onEnterIsland(final IslandEnterEvent event) {
         final User user = User.getInstance(event.getPlayerUUID());
         user.getMetaData(ISLANDFLY + event.getIsland().getUniqueId())
-                .ifPresent(mdv -> {
-                    if (mdv.asBoolean()) {
-                        user.getPlayer().setAllowFlight(true);
-                        user.getPlayer().setFlying(mdv.asBoolean());
-                    }
-                });
+        .ifPresent(mdv -> {
+            if (mdv.asBoolean()) {
+                user.getPlayer().setAllowFlight(true);
+                user.getPlayer().setFlying(mdv.asBoolean());
+            }
+        });
         // Wait until after arriving at the island
         Bukkit.getScheduler().runTask(this.addon.getPlugin(), () -> checkUser(user));
     }

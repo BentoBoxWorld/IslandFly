@@ -1,12 +1,22 @@
 package world.bentobox.islandfly;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.bukkit.Material;
+import org.bukkit.World;
+
 import world.bentobox.bentobox.api.addons.Addon;
+import world.bentobox.bentobox.api.addons.GameModeAddon;
 import world.bentobox.bentobox.api.configuration.Config;
 import world.bentobox.bentobox.api.flags.Flag;
 import world.bentobox.bentobox.managers.RanksManager;
 import world.bentobox.islandfly.config.Settings;
-import world.bentobox.islandfly.listeners.*;
+import world.bentobox.islandfly.listeners.FlyDeathListener;
+import world.bentobox.islandfly.listeners.FlyFlagListener;
+import world.bentobox.islandfly.listeners.FlyListener;
+import world.bentobox.islandfly.listeners.FlyLoginListener;
+import world.bentobox.islandfly.listeners.FlyLogoutListener;
 import world.bentobox.level.Level;
 
 
@@ -18,6 +28,8 @@ public class IslandFlyAddon extends Addon {
      * Settings object for IslandFlyAddon
      */
     private Settings settings;
+    
+    private Set<GameModeAddon> hookedGameModes = new HashSet<>();
 
     /**
      * Level addon instance.
@@ -90,6 +102,8 @@ public class IslandFlyAddon extends Addon {
                         });
 
                 ISLAND_FLY_PROTECTION.addGameModeAddon(gameModeAddon);
+                
+                hookedGameModes.add(gameModeAddon);
             }
         });
 
@@ -162,5 +176,14 @@ public class IslandFlyAddon extends Addon {
     public Level getLevelAddon()
     {
         return levelAddon;
+    }
+    
+    /**
+     * Return if the world is covered by this addon
+     * @param world world to check
+     * @return true if it is
+     */
+    public boolean inWorld(World world) {
+        return hookedGameModes.stream().anyMatch(gm -> gm.inWorld(world));
     }
 }
