@@ -1,4 +1,8 @@
 # IslandFly
+
+<!-- BentoBox stats badges: https://download.bentobox.world/admin (Badges tab) -->
+[![Servers](https://download.bentobox.world/badge/IslandFly/servers.svg)](https://download.bentobox.world/) [![Downloads](https://download.bentobox.world/badge/IslandFly/downloads.svg)](https://download.bentobox.world/) [![Minecraft](https://download.bentobox.world/badge/IslandFly/mc.svg)](https://download.bentobox.world/)
+
 [![Build Status](https://ci.codemc.org/buildStatus/icon?job=BentoBoxWorld/IslandFly)](https://ci.codemc.org/job/BentoBoxWorld/job/IslandFly/)
 
 Add-on for BentoBox to allow players of Gamemode Addons to fly on their island.
